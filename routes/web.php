@@ -14,3 +14,7 @@
 Auth::routes(['register' => false]);
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/main', 'MainController@index')->name('main');
+
+Route::post('/category', 'CategoryController@store');
