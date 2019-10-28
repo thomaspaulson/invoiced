@@ -40,14 +40,14 @@ class AddCategory extends React.Component {
 
     const data = new FormData(event.target);
 
-    axios.post('/category', data)         
+    axios.post('/ajax/category', data)         
       .then(result => this.setSuccess(result))
       .catch(error => this.setState({ error }));
   }
 
   setSuccess(result){
 
-    console.log(result);
+    //console.log(result);
     const message = result.data.message;
     this.setState({
       title: '',

@@ -73193,7 +73193,7 @@ function Category() {
     path: "/category/add"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_AddCategory__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/category/edit"
+    path: "/category/:id/edit"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/category"
@@ -73284,7 +73284,7 @@ function (_React$Component) {
       event.preventDefault(); //debugger;
 
       var data = new FormData(event.target);
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/category', data).then(function (result) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/ajax/category', data).then(function (result) {
         return _this2.setSuccess(result);
       })["catch"](function (error) {
         return _this2.setState({
@@ -73295,7 +73295,7 @@ function (_React$Component) {
   }, {
     key: "setSuccess",
     value: function setSuccess(result) {
-      console.log(result);
+      //console.log(result);
       var message = result.data.message;
       this.setState({
         title: '',
@@ -73460,6 +73460,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73470,13 +73472,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -73486,15 +73489,57 @@ var ListCategory =
 function (_React$Component) {
   _inherits(ListCategory, _React$Component);
 
-  function ListCategory() {
+  function ListCategory(props) {
+    var _this;
+
     _classCallCheck(this, ListCategory);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ListCategory).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ListCategory).call(this, props));
+    _this.state = {
+      list: null,
+      error: null
+    };
+    _this.setResultList = _this.setResultList.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ListCategory, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/ajax/category').then(function (result) {
+        return _this2.setResultList(result.data);
+      })["catch"](function (error) {
+        return _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "setResultList",
+    value: function setResultList(list) {
+      //console.log(list);
+      this.setState({
+        list: list
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var categories;
+
+      if (this.state.list !== null) {
+        categories = this.state.list.map(function (category) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+            key: category.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            className: "nav-link",
+            to: '/category/' + category.id + '/edit'
+          }, "edit"), " | delete "));
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-sm-flex align-items-center justify-content-between mb-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -73519,7 +73564,7 @@ function (_React$Component) {
         id: "dataTable",
         width: "100%",
         cellSpacing: "0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Position"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Age"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Start date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Salary"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Position"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Age"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Start date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Salary"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Tiger Nixon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "System Architect"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Edinburgh"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "61"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2011/04/25"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$320,800")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Garrett Winters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Accountant"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Tokyo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2011/07/25"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$170,750")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Ashton Cox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Junior Technical Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "San Francisco"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "66"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2009/01/12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$86,000"))))))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, categories))))));
     }
   }]);
 
@@ -74058,121 +74103,9 @@ function Sidebar() {
     className: "fas fa-laugh-wink"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sidebar-brand-text mx-3"
-  }, "SB Admin ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("sup", null, "2"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "Rubco ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("sup", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     className: "sidebar-divider my-0"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link",
-    href: "index.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-fw fa-tachometer-alt"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Dashboard"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    className: "sidebar-divider"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sidebar-heading"
-  }, "Interface"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item active"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link",
-    href: "#",
-    "data-toggle": "collapse",
-    "data-target": "#collapseTwo",
-    "aria-expanded": "true",
-    "aria-controls": "collapseTwo"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-fw fa-cog"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Components")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "collapseTwo",
-    className: "collapse show",
-    "aria-labelledby": "headingTwo",
-    "data-parent": "#accordionSidebar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bg-white py-2 collapse-inner rounded"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "collapse-header"
-  }, "Custom Components:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "buttons.html"
-  }, "Buttons"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item active",
-    href: "cards.html"
-  }, "Cards")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link collapsed",
-    href: "#",
-    "data-toggle": "collapse",
-    "data-target": "#collapseUtilities",
-    "aria-expanded": "true",
-    "aria-controls": "collapseUtilities"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-fw fa-wrench"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Utilities")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "collapseUtilities",
-    className: "collapse",
-    "aria-labelledby": "headingUtilities",
-    "data-parent": "#accordionSidebar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bg-white py-2 collapse-inner rounded"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "collapse-header"
-  }, "Custom Utilities:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "utilities-color.html"
-  }, "Colors"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "utilities-border.html"
-  }, "Borders"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "utilities-animation.html"
-  }, "Animations"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "utilities-other.html"
-  }, "Other")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    className: "sidebar-divider"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sidebar-heading"
-  }, "Addons"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "nav-link collapsed",
-    href: "#",
-    "data-toggle": "collapse",
-    "data-target": "#collapsePages",
-    "aria-expanded": "true",
-    "aria-controls": "collapsePages"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-fw fa-folder"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Pages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "collapsePages",
-    className: "collapse",
-    "aria-labelledby": "headingPages",
-    "data-parent": "#accordionSidebar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bg-white py-2 collapse-inner rounded"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "collapse-header"
-  }, "Login Screens:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "login.html"
-  }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "register.html"
-  }, "Register"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "forgot-password.html"
-  }, "Forgot Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "collapse-divider"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "collapse-header"
-  }, "Other Pages:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "404.html"
-  }, "404 Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapse-item",
-    href: "blank.html"
-  }, "Blank Page")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "nav-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-link",

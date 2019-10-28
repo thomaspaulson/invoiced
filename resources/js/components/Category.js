@@ -18,7 +18,7 @@ function Category() {
                 <Route exact path="/category/add">
                     <AddCategory />
                 </Route>
-                <Route exact path="/category/edit">
+                <Route exact path="/category/:id/edit">
                     <EditCategory />
                 </Route>
                 <Route exact path="/category">

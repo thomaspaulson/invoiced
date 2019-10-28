@@ -1,10 +1,48 @@
 import React from 'react';
 import { Switch, Route , Link } from 'react-router-dom';
 
+import axios from 'axios';
 
 class ListCategory extends React.Component {
 
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: null,
+      error: null,
+    };
+
+    this.setResultList = this.setResultList.bind(this);
+  }
+
+  componentDidMount() {
+
+    axios.get('/ajax/category')         
+      .then(result => this.setResultList(result.data))
+      .catch(error => this.setState({ error }));
+
+  }
+
+  setResultList(list){
+    //console.log(list);
+    this.setState({ list });
+  }
+
   render() {
+
+    let categories;
+
+    if (this.state.list !== null) {
+      categories = this.state.list.map(category => (
+        <tr key={category.id}>
+          <td>{category.id}</td>
+          <td>{category.title}</td>
+          <td><Link className="nav-link" to={'/category/'+ category.id +'/edit'}>edit</Link> | delete </td>
+        </tr>
+      ));
+    }
+
     return (
       <div>
       {/* dummy div*/}
@@ -30,49 +68,20 @@ class ListCategory extends React.Component {
           <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th></th>
               </tr>
             </thead>
             <tfoot>
               <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th></th>
               </tr>
             </tfoot>
             <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-              </tr>
-              <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-              </tr>
-              <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-              </tr>
+              {categories}
             </tbody>
           </table>
         </div>
