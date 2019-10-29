@@ -4,7 +4,94 @@ import { Switch, Route , Link } from 'react-router-dom';
 
 class EditCategory extends React.Component {
 
+    constructor(props) {
+      super(props);
+      this.state = {
+        title: '',
+        description: '',
+        error: null,
+        message: ""
+      };
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.setResult = this.setResult.bind(this);
+  }
+
+
+  
+  handleChange(event){
+    const target = event.target;
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+
+    this.setState({
+      message: ''
+    });
+
+  }
+
+  handleSubmit(event){
+    
+    event.preventDefault();    
+    const data = new FormData(event.target);
+    data.append('_method', 'PUT');
+    //console.log(data);
+    axios.post(`/ajax/category/${this.props.match.params.id}/edit`, data)         
+      .then(result => this.setSuccess(result))
+      .catch(error=> this.setError(error));
+  }  
+
+
+  setSuccess(result){
+
+    //console.log(result);
+    const message = result.data.message;
+    this.setState({
+      title: '',
+      description: '',
+      error: null,
+      message: message
+    });
+
+  }
+
+  setError(error){
+    console.log(error.response);
+    //console.log(q);
+  }
+
+  componentDidMount() {
+    //console.log(this.props.match);
+    const { match: { params } } = this.props;
+    //console.log(params);
+    axios.get(`/ajax/category/${params.id}`)         
+      .then(result => this.setResult(result.data))
+      .catch(error => this.setState({ error }));
+
+  }
+
+  setResult(data){
+    //console.log(list);
+    const { title, description } = data;
+    this.setState({ title,  description });
+  }
+
+
   render() {
+
+    let message;
+
+    if(this.state.message){
+      message =`<div className="alert alert-success" role="alert">
+      ${this.state.message}        
+      </div>`;
+    }
+
     return (
       <div>
       {/* dummy div*/}
@@ -16,68 +103,37 @@ class EditCategory extends React.Component {
           <i className="fas fa-fw fa-chart-area"></i>
           <span>Go back</span>
         </Link>            
-
       </div>
 
 
-
-      <div className="card shadow mb-4">
-      <div className="card-header py-3">
-        <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
-      </div>
-      <div className="card-body">
-        <div className="table-responsive">
-          <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-              </tr>
-            </tfoot>
-            <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-              </tr>
-              <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-              </tr>
-              <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-              </tr>
-            </tbody>
-          </table>
+      <div className="row">        
+        <div className="col-xl-12 col-md-12 mb-4">		
+        {this.state.error}       
+        {message} 
+        <form onSubmit={this.handleSubmit} >
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input 
+              type="text" className="form-control" 
+              id="title" name="title" placeholder="title" 
+              value={ this.state.title } required 
+              maxLength="150" onChange={this.handleChange} />          
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <input 
+              type="text" className="form-control" id="description" 
+              name="description" placeholder="description" 
+              value={ this.state.description }  maxLength="150" 
+              onChange={this.handleChange} />
+          </div>
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+        
         </div>
       </div>
-    </div>
+
+
 
 
       {/* dummy div*/}

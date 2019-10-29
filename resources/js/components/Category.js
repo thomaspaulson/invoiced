@@ -14,13 +14,11 @@ function Category() {
 
     return (           
             <div>
-            
+
                 <Route exact path="/category/add">
                     <AddCategory />
                 </Route>
-                <Route exact path="/category/:id/edit">
-                    <EditCategory />
-                </Route>
+                <Route exact path="/category/:id/edit" component={EditCategory} />                
                 <Route exact path="/category">
                     <ListCategory />
                 </Route>

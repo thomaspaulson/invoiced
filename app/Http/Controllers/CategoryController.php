@@ -62,13 +62,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:150',            
+            'description' => 'max:250',            
+        ]);
+
         $category = Category::find($id);
         $category->title = $request->get('title');
         $category->description = $request->get('description');
         $category->save();
 
-
-        return response()->json('Category updated.');
+        return response()->json(['category' => $category, 'status' => 1, 'message'=>'Category updated.']);
     }
 
 
@@ -84,6 +88,6 @@ class CategoryController extends Controller
       $category->delete();
 
 
-      return response()->json('Category deleted.');
+      return response()->json(['status' => 1, 'message'=>'Category deleted.']);
     }    
 }

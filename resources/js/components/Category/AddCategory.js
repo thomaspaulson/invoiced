@@ -35,14 +35,14 @@ class AddCategory extends React.Component {
 
   handleSubmit(event){
     
-    event.preventDefault();
-    //debugger;
+    event.preventDefault();    
 
     const data = new FormData(event.target);
-
+    
+    console.log( data );
     axios.post('/ajax/category', data)         
       .then(result => this.setSuccess(result))
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setError({ error }));
   }
 
   setSuccess(result){
@@ -58,8 +58,22 @@ class AddCategory extends React.Component {
 
   }
 
+  setError(error){
+    console.log(error.response);
+    //console.log(q);
+  }
+
 
   render() {
+
+    let message;
+
+    if(this.state.message){
+      message =`<div className="alert alert-success" role="alert">
+      ${this.state.message}        
+      </div>`;
+    }
+
     return (
       <div>
       
@@ -75,9 +89,7 @@ class AddCategory extends React.Component {
       <div className="row">        
         <div className="col-xl-12 col-md-12 mb-4">		
         {this.state.error}        
-        <div className="alert alert-success" role="alert">
-        {this.state.message}        
-        </div>
+        {message}
         <form onSubmit={this.handleSubmit} >
           <div className="form-group">
             <label htmlFor="title">Title</label>

@@ -73193,8 +73193,9 @@ function Category() {
     path: "/category/add"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_AddCategory__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/category/:id/edit"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/category/:id/edit",
+    component: _Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/category"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_ListCategory__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
@@ -73281,13 +73282,13 @@ function (_React$Component) {
     value: function handleSubmit(event) {
       var _this2 = this;
 
-      event.preventDefault(); //debugger;
-
+      event.preventDefault();
       var data = new FormData(event.target);
+      console.log(data);
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/ajax/category', data).then(function (result) {
         return _this2.setSuccess(result);
       })["catch"](function (error) {
-        return _this2.setState({
+        return _this2.setError({
           error: error
         });
       });
@@ -73305,8 +73306,19 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "setError",
+    value: function setError(error) {
+      console.log(error.response); //console.log(q);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var message;
+
+      if (this.state.message) {
+        message = "<div className=\"alert alert-success\" role=\"alert\">\n      ".concat(this.state.message, "        \n      </div>");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-sm-flex align-items-center justify-content-between mb-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -73320,10 +73332,7 @@ function (_React$Component) {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xl-12 col-md-12 mb-4"
-      }, this.state.error, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "alert alert-success",
-        role: "alert"
-      }, this.state.message), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, this.state.error, message, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -73380,6 +73389,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -73388,9 +73399,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -73404,15 +73415,104 @@ var EditCategory =
 function (_React$Component) {
   _inherits(EditCategory, _React$Component);
 
-  function EditCategory() {
+  function EditCategory(props) {
+    var _this;
+
     _classCallCheck(this, EditCategory);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(EditCategory).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EditCategory).call(this, props));
+    _this.state = {
+      title: '',
+      description: '',
+      error: null,
+      message: ""
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.setResult = _this.setResult.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(EditCategory, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      var target = event.target; //const value = target.type === 'checkbox' ? target.checked : target.value;
+
+      var value = target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+      this.setState({
+        message: ''
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var data = new FormData(event.target);
+      data.append('_method', 'PUT'); //console.log(data);
+
+      axios.post("/ajax/category/".concat(this.props.match.params.id, "/edit"), data).then(function (result) {
+        return _this2.setSuccess(result);
+      })["catch"](function (error) {
+        return _this2.setError(error);
+      });
+    }
+  }, {
+    key: "setSuccess",
+    value: function setSuccess(result) {
+      //console.log(result);
+      var message = result.data.message;
+      this.setState({
+        title: '',
+        description: '',
+        error: null,
+        message: message
+      });
+    }
+  }, {
+    key: "setError",
+    value: function setError(error) {
+      console.log(error.response); //console.log(q);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      //console.log(this.props.match);
+      var params = this.props.match.params; //console.log(params);
+
+      axios.get("/ajax/category/".concat(params.id)).then(function (result) {
+        return _this3.setResult(result.data);
+      })["catch"](function (error) {
+        return _this3.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "setResult",
+    value: function setResult(data) {
+      //console.log(list);
+      var title = data.title,
+          description = data.description;
+      this.setState({
+        title: title,
+        description: description
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var message;
+
+      if (this.state.message) {
+        message = "<div className=\"alert alert-success\" role=\"alert\">\n      ".concat(this.state.message, "        \n      </div>");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-sm-flex align-items-center justify-content-between mb-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -73423,21 +73523,42 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-fw fa-chart-area"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Go back"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card shadow mb-4"
+        className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header py-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "m-0 font-weight-bold text-primary"
-      }, "DataTables Example")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
+        className: "col-xl-12 col-md-12 mb-4"
+      }, this.state.error, message, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "table-responsive"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table table-bordered",
-        id: "dataTable",
-        width: "100%",
-        cellSpacing: "0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Position"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Age"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Start date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Salary"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Position"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Age"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Start date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Salary"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Tiger Nixon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "System Architect"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Edinburgh"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "61"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2011/04/25"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$320,800")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Garrett Winters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Accountant"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Tokyo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2011/07/25"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$170,750")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Ashton Cox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Junior Technical Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "San Francisco"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "66"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2009/01/12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$86,000"))))))));
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "title"
+      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "title",
+        name: "title",
+        placeholder: "title",
+        value: this.state.title,
+        required: true,
+        maxLength: "150",
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "description"
+      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "description",
+        name: "description",
+        placeholder: "description",
+        value: this.state.description,
+        maxLength: "150",
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))));
     }
   }]);
 
@@ -73500,6 +73621,7 @@ function (_React$Component) {
       error: null
     };
     _this.setResultList = _this.setResultList.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -73523,10 +73645,50 @@ function (_React$Component) {
       this.setState({
         list: list
       });
+    } // handle delete
+
+  }, {
+    key: "handleDelete",
+    value: function handleDelete(id) {
+      var _this3 = this;
+
+      var confirm = window.confirm('Are you sure to delete this record?');
+
+      if (confirm) {
+        // remove from local state    
+        var isNotId = function isNotId(list) {
+          return list.id !== id;
+        };
+
+        var updatedList = this.state.list.filter(isNotId);
+        this.setState({
+          list: updatedList
+        }); // make delete request to the backend
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("/ajax/category/".concat(id)).then(function (result) {
+          return _this3.setSuccess(result);
+        })["catch"](function (error) {
+          return _this3.setState({
+            error: error
+          });
+        });
+      }
+    }
+  }, {
+    key: "setSuccess",
+    value: function setSuccess(result) {
+      console.log(result);
+    }
+  }, {
+    key: "setError",
+    value: function setError(error) {
+      console.log(error.response); //console.log(q);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var categories;
 
       if (this.state.list !== null) {
@@ -73534,9 +73696,14 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
             key: category.id
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-            className: "nav-link",
-            to: '/category/' + category.id + '/edit'
-          }, "edit"), " | delete "));
+            className: "btn btn-sm btn-success",
+            to: "/category/".concat(category.id, "/edit")
+          }, "edit"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: function onClick() {
+              return _this4.handleDelete(category.id);
+            },
+            className: "btn btn-sm btn-warning "
+          }, "Delete")));
         });
       }
 
