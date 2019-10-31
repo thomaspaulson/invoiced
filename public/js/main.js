@@ -84659,7 +84659,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helpers_message_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/message-helpers */ "./resources/js/helpers/message-helpers.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -84683,7 +84683,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
+ //import {alertMessage} from '../../helpers/message-helpers';
 
 var AddCategory =
 /*#__PURE__*/
@@ -84758,7 +84758,9 @@ function (_React$Component) {
       var message;
 
       if (this.state.message) {
-        message = Object(_helpers_message_helpers__WEBPACK_IMPORTED_MODULE_3__["alertMessage"])(this.state.message);
+        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+          color: "success"
+        }, this.state.message);
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -84829,7 +84831,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _helpers_message_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers/message-helpers */ "./resources/js/helpers/message-helpers.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -84852,7 +84854,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
+ //import {alertMessage} from '../../helpers/message-helpers';
 
 var EditCategory =
 /*#__PURE__*/
@@ -84954,7 +84956,9 @@ function (_React$Component) {
       var message;
 
       if (this.state.message) {
-        message = Object(_helpers_message_helpers__WEBPACK_IMPORTED_MODULE_2__["alertMessage"])(this.state.message);
+        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Alert"], {
+          color: "success"
+        }, this.state.message);
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -85748,9 +85752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helpers_message_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/message-helpers */ "./resources/js/helpers/message-helpers.js");
-/* harmony import */ var _forms_SelectBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../forms/SelectBox */ "./resources/js/forms/SelectBox.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -85777,8 +85779,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-
+ //import {alertMessage} from '../../helpers/message-helpers';
 
 
 
@@ -85794,7 +85795,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AddModel).call(this, props));
     _this.state = {
-      model: {},
+      model: {
+        title: '',
+        category: ''
+      },
+      categoryList: null,
       //title: '',
       //model_id: '',
       error: null,
@@ -85810,17 +85815,11 @@ function (_React$Component) {
     value: function handleChange(event) {
       var target = event.target; //const value = target.type === 'checkbox' ? target.checked : target.value;
 
-      var name = target.value;
-      var value = target.name;
+      var name = target.name;
+      var value = target.value;
       var model = this.state.model;
       this.setState({
-        model: _objectSpread({}, model, _defineProperty({}, name, value))
-      });
-      console.log(name, name); // this.setState({
-      //   [name]: value
-      // });
-
-      this.setState({
+        model: _objectSpread({}, model, _defineProperty({}, name, value)),
         message: ''
       });
     }
@@ -85846,7 +85845,10 @@ function (_React$Component) {
       //console.log(result);
       var message = result.data.message;
       this.setState({
-        model: {},
+        model: {
+          title: '',
+          category: ''
+        },
         error: null,
         message: message
       });
@@ -85857,15 +85859,52 @@ function (_React$Component) {
       console.log(error.response); //console.log(q);
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      //console.log(params);
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/ajax/category").then(function (result) {
+        return _this3.setCategoryList(result.data);
+      })["catch"](function (error) {
+        return _this3.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "setCategoryList",
+    value: function setCategoryList(list) {
+      this.setState({
+        categoryList: list
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this$state$model = this.state.model,
+      var _this$state = this.state,
+          _this$state$model = _this$state.model,
           title = _this$state$model.title,
-          category_id = _this$state$model.category_id;
-      var message;
+          category_id = _this$state$model.category_id,
+          categoryList = _this$state.categoryList;
+      console.log(title);
+      var message, options;
 
       if (this.state.message) {
-        message = Object(_helpers_message_helpers__WEBPACK_IMPORTED_MODULE_3__["alertMessage"])(this.state.message);
+        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+          color: "success"
+        }, this.state.message);
+      }
+
+      if (categoryList) {
+        options = categoryList.map(function (item, index) {
+          //const key = `${this.props.name}-${item.value || `empty${index}`}`;
+          var key = "empty".concat(index);
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            key: key,
+            value: item.id
+          }, item.title);
+        });
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -85887,22 +85926,12 @@ function (_React$Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "title"
-      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Input"], {
-        type: "email",
+      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        type: "text",
         name: "title",
         id: "title",
         placeholder: "with a placeholder",
-        value: this.state.title,
-        required: true,
-        maxLength: "150",
-        onChange: this.handleChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        id: "title",
-        name: "title",
-        placeholder: "title",
-        value: this.state.title,
+        value: title,
         required: true,
         maxLength: "150",
         onChange: this.handleChange
@@ -85910,7 +85939,12 @@ function (_React$Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "model"
-      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_forms_SelectBox__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        type: "select",
+        name: "category_id",
+        id: "category_id",
+        onChange: this.handleChange
+      }, options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
       }, "Submit")))));
@@ -86282,7 +86316,7 @@ function (_React$Component) {
         id: "dataTable",
         width: "100%",
         cellSpacing: "0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "model"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, models))))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, models))))));
     }
   }]);
 
@@ -86385,27 +86419,6 @@ function Sidebar() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Sidebar);
-
-/***/ }),
-
-/***/ "./resources/js/forms/SelectBox.js":
-/*!*****************************************!*\
-  !*** ./resources/js/forms/SelectBox.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function SelectBox() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "select");
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (SelectBox);
 
 /***/ }),
 

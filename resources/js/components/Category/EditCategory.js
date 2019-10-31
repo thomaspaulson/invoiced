@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Route , Link } from 'react-router-dom';
+import { Input, Alert  } from 'reactstrap';
 
-import {alertMessage} from '../../helpers/message-helpers';
+//import {alertMessage} from '../../helpers/message-helpers';
 
 class EditCategory extends React.Component {
 
@@ -49,7 +50,6 @@ class EditCategory extends React.Component {
 
 
   setSuccess(result){
-
     //console.log(result);
     const message = result.data.message;
     this.setState({
@@ -88,7 +88,7 @@ class EditCategory extends React.Component {
     let message;
 
     if(this.state.message){      
-      message = alertMessage(this.state.message);
+      message = <Alert color="success">{this.state.message}</Alert>;
     }
 
     return (

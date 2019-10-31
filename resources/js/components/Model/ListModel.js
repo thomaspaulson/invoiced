@@ -106,7 +106,7 @@ class Listmodel extends React.Component {
                   <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>model</th>
+                    <th>Category</th>
                     <th></th>
                   </tr>
                 </thead>

@@ -83,6 +83,11 @@ class ModelController extends Controller
         return response()->json(['model' => $model, 'status' => 1, 'message'=>'Model updated.']);
     }
 
+    public function show($id)
+    {
+        $model = Model::find($id);
+        return response()->json($model);
+    }
 
     /**
      * Remove the specified resource from storage.
