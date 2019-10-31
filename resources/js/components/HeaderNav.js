@@ -1,9 +1,27 @@
-import React from 'react';
+import React,{Component} from 'react';
 
-function HeaderNav() {
+export default class HeaderNav extends Component {
+   
+  constructor(props){
+    super(props);
+    this.state = { user: {}};
+  }
+
+  componentDidMount() {
+    
+    axios.get('/ajax/user')         
+      .then(result => {
+        this.setState({user: result.data});
+      })
+      .catch(error => {
+        alert(error.response.data);
+        console.log(error.response.data);
+      });
+
+  }
+  
+  render(){ 
     return (
-
-          
           <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
   
             {/* Sidebar Toggle (Topbar) */}
@@ -157,8 +175,10 @@ function HeaderNav() {
               {/* Nav Item - User Information */}
               <li className="nav-item dropdown no-arrow">
                 <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span className="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                  <img className="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                  <span className="mr-2 d-none d-lg-inline text-gray-600 small">{this.state.user.name}</span>
+                  <span className="img-profile rounded-circle text-center">
+                    <i className="fas fa-user fa-sm fa-fw text-gray-400"></i>
+                  </span>
                 </a>
                 {/* Dropdown - User Information */}
                 <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -185,11 +205,6 @@ function HeaderNav() {
             </ul>
   
           </nav>
-          
-        
-        
-    
     );
+  }
 }
-
-export default HeaderNav;

@@ -36,6 +36,11 @@
       .img-profile {
         height: 2rem;
         width: 2rem;
+        border: 1px solid;
+
+        .fas{
+          margin-top: 7px;
+        }
       }
     }
   }

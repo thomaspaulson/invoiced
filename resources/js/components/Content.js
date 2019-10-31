@@ -21,7 +21,7 @@ function Content() {
         <div id="content">
         {/* Main Content */}
 
-          <HeaderNav />
+          <HeaderNav/>
 
           
           <div className="container-fluid">  
