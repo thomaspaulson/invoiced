@@ -14,3 +14,4 @@
 Route::resource('category', 'CategoryController');
 Route::resource('model', 'ModelController');
 
+Route::get('user', 'UserController@index');
