@@ -1,31 +1,31 @@
 import React from 'react';
 import { Switch, Route , Link } from 'react-router-dom';
-
+import axios from 'axios';
 import {alertMessage} from '../../helpers/message-helpers';
+import SelectBox from '../../forms/SelectBox';
 
-class EditCategory extends React.Component {
+class AddModel extends React.Component {
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        title: '',
-        description: '',
-        error: null,
-        message: ""
-      };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.setResult = this.setResult.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      model_id: '',
+      error: null,
+      message: ""
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  
-  handleChange(event){
+  handleChange(event, { name, value }){
     const target = event.target;
     //const value = target.type === 'checkbox' ? target.checked : target.value;
-    const value = target.value;
-    const name = target.name;
+    const tvalue = target.value;
+    const tname = target.name;
 
+    console.log(name, name);
     this.setState({
       [name]: value
     });
@@ -39,17 +39,14 @@ class EditCategory extends React.Component {
   handleSubmit(event){
     
     event.preventDefault();    
-    const data = new FormData(event.target);
-    data.append('_method', 'PUT');
-    //console.log(data);
-    axios.post(`/ajax/category/${this.props.match.params.id}/edit`, data)         
+    const data = new FormData(event.target);    
+    //console.log( data );
+    axios.post('/ajax/model', data)         
       .then(result => this.setSuccess(result))
-      .catch(error=> this.setError(error));
-  }  
-
+      .catch(error => this.setError({ error }));
+  }
 
   setSuccess(result){
-
     //console.log(result);
     const message = result.data.message;
     this.setState({
@@ -66,22 +63,6 @@ class EditCategory extends React.Component {
     //console.log(q);
   }
 
-  componentDidMount() {
-    //console.log(this.props.match);
-    const { match: { params } } = this.props;
-    //console.log(params);
-    axios.get(`/ajax/category/${params.id}`)         
-      .then(result => this.setResult(result.data))
-      .catch(error => this.setState({ error }));
-
-  }
-
-  setResult(data){
-    //console.log(list);
-    const { title, description } = data;
-    this.setState({ title,  description });
-  }
-
 
   render() {
 
@@ -93,13 +74,11 @@ class EditCategory extends React.Component {
 
     return (
       <div>
-      {/* dummy div*/}
-
-
+      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Edit Category</h1>
-        <Link className="nav-link" to="/category">            
-          <i className="fas fa-fw fa-chart-area"></i>
+        <h1 className="h3 mb-0 text-gray-800">Add Model</h1>
+        <Link className="nav-link" to="/model">            
+          <i className="fas fa-fw fa-angle-left"></i>
           <span>Go back</span>
         </Link>            
       </div>
@@ -107,8 +86,8 @@ class EditCategory extends React.Component {
 
       <div className="row">        
         <div className="col-xl-12 col-md-12 mb-4">		
-        {this.state.error}       
-        {message} 
+        {this.state.error}        
+        {message}
         <form onSubmit={this.handleSubmit} >
           <div className="form-group">
             <label htmlFor="title">Title</label>
@@ -119,12 +98,8 @@ class EditCategory extends React.Component {
               maxLength="150" onChange={this.handleChange} />          
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input 
-              type="text" className="form-control" id="description" 
-              name="description" placeholder="description" 
-              value={ this.state.description }  maxLength="150" 
-              onChange={this.handleChange} />
+            <label htmlFor="model">Category</label>
+            <SelectBox />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
@@ -132,10 +107,6 @@ class EditCategory extends React.Component {
         </div>
       </div>
 
-
-
-
-      {/* dummy div*/}
       </div> 
 
     );
@@ -144,4 +115,4 @@ class EditCategory extends React.Component {
 
 
 
-export default EditCategory;
+export default AddModel;

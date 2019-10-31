@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use App\ItemModel;
 
-class CategoryController extends Controller
+class ModelController extends Controller
 {
-
 
     /**
      * Display a listing of the resource.
@@ -16,9 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')
+        $models = ItemModel::join('categories', 'categories.id', '=', 'models.category_id')
+            ->select('models.*', 'categories.title  as category_title')
+            ->orderBy('models.id', 'desc')
             ->get();
-        return response()->json($categories);
+        return response()->json($models);
     }
 
 
@@ -33,17 +34,17 @@ class CategoryController extends Controller
 
         $request->validate([
             'title' => 'required|max:150',            
-            'description' => 'nullable|max:250',            
+            'category_id' => 'required',            
         ]);
 
-        $category = new Category([
+        $model = new ItemModel([
           'title' => $request->get('title'),
-          'description' => $request->get('description')
+          'category_id' => $request->get('category_id')
         ]);
-        $category->save();
+        $model->save();
 
 
-        return response()->json(['category' => $category,'status' => 1, 'message'=>'Category added.']);
+        return response()->json(['model' => $model,'status' => 1, 'message'=>'Model added.']);
     }
 
 
@@ -55,8 +56,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return response()->json($category);
+        $model = ItemModel::find($id);
+        return response()->json($model);
     }
 
 
@@ -71,15 +72,15 @@ class CategoryController extends Controller
     {
         $request->validate([
             'title' => 'required|max:150',            
-            'description' => 'nullable|max:250',            
+            'category_id' => 'required',                  
         ]);
 
-        $category = Category::find($id);
-        $category->title = $request->get('title');
-        $category->description = $request->get('description');
-        $category->save();
+        $model = ItemModel::find($id);
+        $model->title = $request->get('title');
+        $model->category_id = $request->get('category_id');
+        $model->save();
 
-        return response()->json(['category' => $category, 'status' => 1, 'message'=>'Category updated.']);
+        return response()->json(['model' => $model, 'status' => 1, 'message'=>'Model updated.']);
     }
 
 
@@ -91,10 +92,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-      $category = Category::find($id);
-      $category->delete();
+      $model = ItemModel::find($id);
+      $model->delete();
 
-
-      return response()->json(['status' => 1, 'message'=>'Category deleted.']);
+      return response()->json(['status' => 1, 'message'=>'Model deleted.']);      
     }    
+
 }

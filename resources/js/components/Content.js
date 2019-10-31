@@ -1,16 +1,14 @@
 import React from 'react';
-
-import HeaderNav from './HeaderNav';
-import Dashboard from './Dashboard';
-import Category from './Category';
-
 import { 
   BrowserRouter as Router,
   Switch, 
   Route 
  } from 'react-router-dom';
-// in your app.
 
+import HeaderNav from './HeaderNav';
+import Dashboard from './Dashboard';
+import Category from './Category';
+import Model from './Model';
 
 function Content() {
 
@@ -30,12 +28,9 @@ function Content() {
           {/* Begin Page Content - .container-fluid */}          
 
             <Switch>
-                <Route path="/category">                    
-                      <Category />                    
-                </Route>
-                <Route path="/main">
-                    <Dashboard />
-                </Route>
+                <Route path="/category" component={Category} />                    
+                <Route path="/model" component={Model} />                    
+                <Route path="/main" component={Dashboard} />
             </Switch>
 
           

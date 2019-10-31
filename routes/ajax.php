@@ -11,9 +11,6 @@
 |
 */
 
+Route::resource('category', 'CategoryController');
+Route::resource('model', 'ModelController');
 
-Route::post('/category', 'CategoryController@store');
-Route::get('/category', 'CategoryController@index');
-Route::get('/category/{id}', 'CategoryController@edit');
-Route::put('/category/{id}/edit', 'CategoryController@update');
-Route::delete('/category/{id}', 'CategoryController@destroy');

@@ -3,13 +3,13 @@ import { Switch, Route , Link } from 'react-router-dom';
 
 import {alertMessage} from '../../helpers/message-helpers';
 
-class EditCategory extends React.Component {
+class EditModel extends React.Component {
 
     constructor(props) {
       super(props);
       this.state = {
         title: '',
-        description: '',
+        category_id: '',
         error: null,
         message: ""
       };
@@ -17,8 +17,6 @@ class EditCategory extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this);
       this.setResult = this.setResult.bind(this);
   }
-
-
   
   handleChange(event){
     const target = event.target;
@@ -36,8 +34,8 @@ class EditCategory extends React.Component {
 
   }
 
+
   handleSubmit(event){
-    
     event.preventDefault();    
     const data = new FormData(event.target);
     data.append('_method', 'PUT');
@@ -49,12 +47,11 @@ class EditCategory extends React.Component {
 
 
   setSuccess(result){
-
     //console.log(result);
     const message = result.data.message;
     this.setState({
       title: '',
-      description: '',
+      category_id: '',
       error: null,
       message: message
     });
@@ -119,14 +116,14 @@ class EditCategory extends React.Component {
               maxLength="150" onChange={this.handleChange} />          
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="category">Category</label>
             <input 
               type="text" className="form-control" id="description" 
               name="description" placeholder="description" 
               value={ this.state.description }  maxLength="150" 
               onChange={this.handleChange} />
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary">Update</button>
         </form>
         
         </div>
@@ -144,4 +141,4 @@ class EditCategory extends React.Component {
 
 
 
-export default EditCategory;
+export default EditModel;

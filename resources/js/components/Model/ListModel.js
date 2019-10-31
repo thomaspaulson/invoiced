@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 import axios from 'axios';
 
-class ListCategory extends React.Component {
+class Listmodel extends React.Component {
 
 
   constructor(props) {
@@ -19,7 +19,7 @@ class ListCategory extends React.Component {
 
   componentDidMount() {
 
-    axios.get('/ajax/category')
+    axios.get('/ajax/model')
       .then(result => this.setResultList(result.data))
       .catch(error => this.setState({ error }));
 
@@ -40,7 +40,7 @@ class ListCategory extends React.Component {
       const updatedList = this.state.list.filter(isNotId);
       this.setState({ list: updatedList });
       // make delete request to the backend
-      axios.delete(`/ajax/category/${id}`)
+      axios.delete(`/ajax/model/${id}`)
         .then(result => this.setSuccess(result))
         .catch(error => this.setState({ error }));
     }
@@ -57,18 +57,19 @@ class ListCategory extends React.Component {
   
   render() {
 
-    let categories;
+    let models;
 
     if (this.state.list !== null) {
-      categories = this.state.list.map(category => (
-        <tr key={category.id}>
-          <td>{category.id}</td>
-          <td>{category.title}</td>
+      models = this.state.list.map(model => (
+        <tr key={model.id}>
+          <td>{model.id}</td>
+          <td>{model.title}</td>
+          <td>{model.category_title}</td>
           <td>
-            <Link className="btn btn-sm btn-success" to={`/category/${category.id}/edit`}>edit</Link>
+            <Link className="btn btn-sm btn-success" to={`/model/${model.id}/edit`}>edit</Link>
             &nbsp;
             <button
-              onClick={() => this.handleDelete(category.id)}
+              onClick={() => this.handleDelete(model.id)}
               className="btn btn-sm btn-warning "
             >
               Delete
@@ -84,10 +85,10 @@ class ListCategory extends React.Component {
 
 
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 className="h3 mb-0 text-gray-800">Category</h1>
-          <Link className="nav-link" to="/category/add">
+          <h1 className="h3 mb-0 text-gray-800">Model</h1>
+          <Link className="nav-link" to="/model/add">
             <i className="fas fa-fw fa-clone"></i>
-            <span>Add Category</span>
+            <span>Add Model</span>
           </Link>
 
         </div>
@@ -105,11 +106,12 @@ class ListCategory extends React.Component {
                   <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>model</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {categories}
+                  {models}
                 </tbody>
               </table>
             </div>
@@ -126,4 +128,4 @@ class ListCategory extends React.Component {
 
 
 
-export default ListCategory;
+export default Listmodel;

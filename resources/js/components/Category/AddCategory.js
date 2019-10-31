@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route , Link } from 'react-router-dom';
 import axios from 'axios';
+import {alertMessage} from '../../helpers/message-helpers';
 
 class AddCategory extends React.Component {
 
@@ -36,17 +37,14 @@ class AddCategory extends React.Component {
   handleSubmit(event){
     
     event.preventDefault();    
-
-    const data = new FormData(event.target);
-    
-    console.log( data );
+    const data = new FormData(event.target);    
+    //console.log( data );
     axios.post('/ajax/category', data)         
       .then(result => this.setSuccess(result))
       .catch(error => this.setError({ error }));
   }
 
   setSuccess(result){
-
     //console.log(result);
     const message = result.data.message;
     this.setState({
@@ -68,10 +66,8 @@ class AddCategory extends React.Component {
 
     let message;
 
-    if(this.state.message){
-      message =`<div className="alert alert-success" role="alert">
-      ${this.state.message}        
-      </div>`;
+    if(this.state.message){      
+      message = alertMessage(this.state.message);
     }
 
     return (
