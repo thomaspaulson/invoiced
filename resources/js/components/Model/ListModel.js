@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-
 import axios from 'axios';
 
 class Listmodel extends React.Component {
@@ -73,7 +72,8 @@ class Listmodel extends React.Component {
               className="btn btn-sm btn-warning "
             >
               Delete
-            </button>
+            </button>            
+
           </td>
         </tr>
       ));

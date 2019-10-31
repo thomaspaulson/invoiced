@@ -3,14 +3,17 @@ import { Switch, Route , Link } from 'react-router-dom';
 import axios from 'axios';
 import {alertMessage} from '../../helpers/message-helpers';
 import SelectBox from '../../forms/SelectBox';
+import { Input } from 'reactstrap';
+
 
 class AddModel extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      model_id: '',
+      model: {},
+      //title: '',
+      //model_id: '',
       error: null,
       message: ""
     };
@@ -19,16 +22,20 @@ class AddModel extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event, { name, value }){
+  handleChange(event ){
     const target = event.target;
     //const value = target.type === 'checkbox' ? target.checked : target.value;
-    const tvalue = target.value;
-    const tname = target.name;
+    const name = target.value;
+    const value = target.name;
+
+    const { model } = this.state;
+
+    this.setState({ model: { ...model, [name]: value } });
 
     console.log(name, name);
-    this.setState({
-      [name]: value
-    });
+    // this.setState({
+    //   [name]: value
+    // });
 
     this.setState({
       message: ''
@@ -49,12 +56,11 @@ class AddModel extends React.Component {
   setSuccess(result){
     //console.log(result);
     const message = result.data.message;
-    this.setState({
-      title: '',
-      description: '',
+    this.setState({ 
+      model: {},
       error: null,
       message: message
-    });
+    });    
 
   }
 
@@ -65,6 +71,7 @@ class AddModel extends React.Component {
 
 
   render() {
+    const { model: { title, category_id } } = this.state;
 
     let message;
 
@@ -91,6 +98,10 @@ class AddModel extends React.Component {
         <form onSubmit={this.handleSubmit} >
           <div className="form-group">
             <label htmlFor="title">Title</label>
+            <Input type="email" name="title" id="title" placeholder="with a placeholder" 
+               value={ this.state.title } required 
+            maxLength="150" onChange={this.handleChange} />
+
             <input 
               type="text" className="form-control" 
               id="title" name="title" placeholder="title" 

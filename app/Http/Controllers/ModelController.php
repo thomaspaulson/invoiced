@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ItemModel;
+use App\Model;
 
 class ModelController extends Controller
 {
@@ -15,7 +15,7 @@ class ModelController extends Controller
      */
     public function index()
     {
-        $models = ItemModel::join('categories', 'categories.id', '=', 'models.category_id')
+        $models = Model::join('categories', 'categories.id', '=', 'models.category_id')
             ->select('models.*', 'categories.title  as category_title')
             ->orderBy('models.id', 'desc')
             ->get();
@@ -37,7 +37,7 @@ class ModelController extends Controller
             'category_id' => 'required',            
         ]);
 
-        $model = new ItemModel([
+        $model = new Model([
           'title' => $request->get('title'),
           'category_id' => $request->get('category_id')
         ]);
@@ -56,7 +56,7 @@ class ModelController extends Controller
      */
     public function edit($id)
     {
-        $model = ItemModel::find($id);
+        $model = Model::find($id);
         return response()->json($model);
     }
 
@@ -75,7 +75,7 @@ class ModelController extends Controller
             'category_id' => 'required',                  
         ]);
 
-        $model = ItemModel::find($id);
+        $model = Model::find($id);
         $model->title = $request->get('title');
         $model->category_id = $request->get('category_id');
         $model->save();
@@ -92,7 +92,7 @@ class ModelController extends Controller
      */
     public function destroy($id)
     {
-      $model = ItemModel::find($id);
+      $model = Model::find($id);
       $model->delete();
 
       return response()->json(['status' => 1, 'message'=>'Model deleted.']);      
