@@ -13,5 +13,6 @@
 
 Route::resource('category', 'CategoryController');
 Route::resource('model', 'ModelController');
+Route::resource('billingunit', 'BillingUnitController');
 
 Route::get('user', 'UserController@index');
