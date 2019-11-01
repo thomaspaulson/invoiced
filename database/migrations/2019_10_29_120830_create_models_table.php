@@ -17,6 +17,7 @@ class CreateModelsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title', 150);	
             $table->integer('category_id');	
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
 
             // $table->foreign('category_id')
