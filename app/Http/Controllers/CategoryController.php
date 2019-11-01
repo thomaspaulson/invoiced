@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return response()->json($category);
     }
-
+    
 
     /**
      * Update the specified resource in storage.
@@ -81,6 +81,13 @@ class CategoryController extends Controller
 
         return response()->json(['category' => $category, 'status' => 1, 'message'=>'Category updated.']);
     }
+
+    public function show($id)
+    {
+        $category = Category::find($id);
+        return response()->json($category);
+    }
+
 
 
     /**
