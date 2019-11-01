@@ -1,10 +1,9 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
 class ListBillingUnit extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -26,12 +25,10 @@ class ListBillingUnit extends React.Component {
   }
 
   setResultList(list) {
-    //console.log(list);
     this.setState({ list });
   }
 
 
-  // handle delete
   handleDelete(id) {
     let confirm = window.confirm('Are you sure to delete this record?');
     if (confirm) {
@@ -57,7 +54,7 @@ class ListBillingUnit extends React.Component {
   
   render() {
 
-    let categories;
+    let billingunits;
 
     if (this.state.list !== null) {
       categories = this.state.list.map(category => (
@@ -80,8 +77,6 @@ class ListBillingUnit extends React.Component {
 
     return (
       <div>
-        {/* dummy div*/}
-
 
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 className="h3 mb-0 text-gray-800">Category</h1>
@@ -115,9 +110,7 @@ class ListBillingUnit extends React.Component {
             </div>
           </div>
         </div>
-
-
-        {/* dummy div*/}
+        
       </div>
 
     );

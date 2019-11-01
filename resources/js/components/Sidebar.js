@@ -19,7 +19,7 @@ function Sidebar() {
 
           {/* Nav Item - Dashboard */}
           <li className="nav-item">
-            <Link className="nav-link" to="/main">            
+            <Link className="nav-link" to="/">            
               <i className="fas fa-fw fa-tachometer-alt"></i>
               <span>Dashboard</span>
             </Link>            
@@ -42,6 +42,7 @@ function Sidebar() {
             <div id="collapseTwo" className="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div className="bg-white py-2 collapse-inner rounded">
                 <h6 className="collapse-header">Items</h6>
+                <Link className="collapse-item" to="/billingunit">Billing Units</Link>
                 <Link className="collapse-item" to="/category">Category</Link>
                 <Link className="collapse-item" to="/model">Model</Link>
               </div>

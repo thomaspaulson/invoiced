@@ -84606,6 +84606,549 @@ if (document.getElementById('app')) {
 
 /***/ }),
 
+/***/ "./resources/js/components/BillingUnit/AddBillingUnit.jsx":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/BillingUnit/AddBillingUnit.jsx ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var AddBillingUnit =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(AddBillingUnit, _React$Component);
+
+  function AddBillingUnit(props) {
+    var _this;
+
+    _classCallCheck(this, AddBillingUnit);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AddBillingUnit).call(this, props));
+    _this.state = {
+      title: '',
+      description: '',
+      error: null,
+      message: ""
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AddBillingUnit, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      var target = event.target; //const value = target.type === 'checkbox' ? target.checked : target.value;
+
+      var value = target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+      this.setState({
+        message: ''
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var data = new FormData(event.target); //console.log( data );
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/ajax/billingunit', data).then(function (result) {
+        return _this2.setSuccess(result);
+      })["catch"](function (error) {
+        return _this2.setError({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "setSuccess",
+    value: function setSuccess(result) {
+      //console.log(result);
+      var message = result.data.message;
+      this.setState({
+        title: '',
+        description: '',
+        error: null,
+        message: message
+      });
+    }
+  }, {
+    key: "setError",
+    value: function setError(error) {
+      console.log(error.response); //console.log(q);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var message;
+
+      if (this.state.message) {
+        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+          color: "success"
+        }, this.state.message);
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-sm-flex align-items-center justify-content-between mb-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "h3 mb-0 text-gray-800"
+      }, "Add Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "nav-link",
+        to: "/category"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-fw fa-angle-left"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Go back"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xl-12 col-md-12 mb-4"
+      }, this.state.error, message, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "title"
+      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "title",
+        name: "title",
+        placeholder: "title",
+        value: this.state.title,
+        required: true,
+        maxLength: "150",
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "description"
+      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "description",
+        name: "description",
+        placeholder: "description",
+        value: this.state.description,
+        maxLength: "150",
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))));
+    }
+  }]);
+
+  return AddBillingUnit;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (AddBillingUnit);
+
+/***/ }),
+
+/***/ "./resources/js/components/BillingUnit/EditBillingUnit.jsx":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/BillingUnit/EditBillingUnit.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+ //import {alertMessage} from '../../helpers/message-helpers';
+
+var EditBillingUnit =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(EditBillingUnit, _React$Component);
+
+  function EditBillingUnit(props) {
+    var _this;
+
+    _classCallCheck(this, EditBillingUnit);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EditBillingUnit).call(this, props));
+    _this.state = {
+      title: '',
+      description: '',
+      error: null,
+      message: ""
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.setResult = _this.setResult.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(EditBillingUnit, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      var target = event.target; //const value = target.type === 'checkbox' ? target.checked : target.value;
+
+      var value = target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+      this.setState({
+        message: ''
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var data = new FormData(event.target);
+      data.append('_method', 'PUT'); //console.log(data);
+
+      axios.post("/ajax/billingunit/".concat(this.props.match.params.id, "/edit"), data).then(function (result) {
+        return _this2.setSuccess(result);
+      })["catch"](function (error) {
+        return _this2.setError(error);
+      });
+    }
+  }, {
+    key: "setSuccess",
+    value: function setSuccess(result) {
+      //console.log(result);
+      var message = result.data.message;
+      this.setState({
+        title: '',
+        description: '',
+        error: null,
+        message: message
+      });
+    }
+  }, {
+    key: "setError",
+    value: function setError(error) {
+      console.log(error.response); //console.log(q);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      //console.log(this.props.match);
+      var params = this.props.match.params; //console.log(params);
+
+      axios.get("/ajax/category/".concat(params.id)).then(function (result) {
+        return _this3.setResult(result.data);
+      })["catch"](function (error) {
+        return _this3.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "setResult",
+    value: function setResult(data) {
+      //console.log(list);
+      var title = data.title,
+          description = data.description;
+      this.setState({
+        title: title,
+        description: description
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var message;
+
+      if (this.state.message) {
+        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Alert"], {
+          color: "success"
+        }, this.state.message);
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-sm-flex align-items-center justify-content-between mb-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "h3 mb-0 text-gray-800"
+      }, "Edit Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "nav-link",
+        to: "/category"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-fw fa-chart-area"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Go back"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xl-12 col-md-12 mb-4"
+      }, this.state.error, message, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "title"
+      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "title",
+        name: "title",
+        placeholder: "title",
+        value: this.state.title,
+        required: true,
+        maxLength: "150",
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "description"
+      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "description",
+        name: "description",
+        placeholder: "description",
+        value: this.state.description,
+        maxLength: "150",
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))));
+    }
+  }]);
+
+  return EditBillingUnit;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (EditBillingUnit);
+
+/***/ }),
+
+/***/ "./resources/js/components/BillingUnit/ListBillingUnit.jsx":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/BillingUnit/ListBillingUnit.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var ListBillingUnit =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ListBillingUnit, _React$Component);
+
+  function ListBillingUnit(props) {
+    var _this;
+
+    _classCallCheck(this, ListBillingUnit);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ListBillingUnit).call(this, props));
+    _this.state = {
+      list: null,
+      error: null
+    };
+    _this.setResultList = _this.setResultList.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ListBillingUnit, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/ajax/billingunit').then(function (result) {
+        return _this2.setResultList(result.data);
+      })["catch"](function (error) {
+        return _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "setResultList",
+    value: function setResultList(list) {
+      this.setState({
+        list: list
+      });
+    }
+  }, {
+    key: "handleDelete",
+    value: function handleDelete(id) {
+      var _this3 = this;
+
+      var confirm = window.confirm('Are you sure to delete this record?');
+
+      if (confirm) {
+        // remove from local state    
+        var isNotId = function isNotId(list) {
+          return list.id !== id;
+        };
+
+        var updatedList = this.state.list.filter(isNotId);
+        this.setState({
+          list: updatedList
+        }); // make delete request to the backend
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("/ajax/category/".concat(id)).then(function (result) {
+          return _this3.setSuccess(result);
+        })["catch"](function (error) {
+          return _this3.setState({
+            error: error
+          });
+        });
+      }
+    }
+  }, {
+    key: "setSuccess",
+    value: function setSuccess(result) {
+      console.log(result);
+    }
+  }, {
+    key: "setError",
+    value: function setError(error) {
+      console.log(error.response); //console.log(q);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var billingunits;
+
+      if (this.state.list !== null) {
+        categories = this.state.list.map(function (category) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+            key: category.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            className: "btn btn-sm btn-success",
+            to: "/billingunit/".concat(category.id, "/edit")
+          }, "edit"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: function onClick() {
+              return _this4.handleDelete(category.id);
+            },
+            className: "btn btn-sm btn-warning "
+          }, "Delete")));
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-sm-flex align-items-center justify-content-between mb-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "h3 mb-0 text-gray-800"
+      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "nav-link",
+        to: "/category/add"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-fw fa-clone"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Add Category"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card shadow mb-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header py-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "m-0 font-weight-bold text-primary"
+      }, "List")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "table-responsive"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-bordered",
+        id: "dataTable",
+        width: "100%",
+        cellSpacing: "0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, categories))))));
+    }
+  }]);
+
+  return ListBillingUnit;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ListBillingUnit);
+
+/***/ }),
+
 /***/ "./resources/js/components/Category/AddCategory.js":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Category/AddCategory.js ***!
@@ -85169,11 +85712,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_ListModel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Model/ListModel */ "./resources/js/components/Model/ListModel.js");
 /* harmony import */ var _Model_AddModel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Model/AddModel */ "./resources/js/components/Model/AddModel.js");
 /* harmony import */ var _Model_EditModel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Model/EditModel */ "./resources/js/components/Model/EditModel.js");
+/* harmony import */ var _BillingUnit_AddBillingUnit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./BillingUnit/AddBillingUnit */ "./resources/js/components/BillingUnit/AddBillingUnit.jsx");
+/* harmony import */ var _BillingUnit_EditBillingUnit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./BillingUnit/EditBillingUnit */ "./resources/js/components/BillingUnit/EditBillingUnit.jsx");
+/* harmony import */ var _BillingUnit_ListBillingUnit__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BillingUnit/ListBillingUnit */ "./resources/js/components/BillingUnit/ListBillingUnit.jsx");
 
 
 
  //import Category from './Category';
 //import Model from './Model';
+
+
+
 
 
 
@@ -85191,6 +85740,15 @@ function Content() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeaderNav__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/billingunit/add",
+    component: _BillingUnit_AddBillingUnit__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/billingunit/:id/edit",
+    component: _BillingUnit_EditBillingUnit__WEBPACK_IMPORTED_MODULE_11__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/billingunit",
+    component: _BillingUnit_ListBillingUnit__WEBPACK_IMPORTED_MODULE_12__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/category/add",
     component: _Category_AddCategory__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -86380,7 +86938,7 @@ function Sidebar() {
     className: "nav-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-link",
-    to: "/main"
+    to: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-fw fa-tachometer-alt"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Dashboard"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
@@ -86408,6 +86966,9 @@ function Sidebar() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "collapse-header"
   }, "Items"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "collapse-item",
+    to: "/billingunit"
+  }, "Billing Units"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "collapse-item",
     to: "/category"
   }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {

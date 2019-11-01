@@ -15,6 +15,9 @@ import EditCategory from './Category/EditCategory';
 import ListModel from './Model/ListModel';
 import AddModel from './Model/AddModel';
 import EditModel from './Model/EditModel';
+import AddBillingUnit from './BillingUnit/AddBillingUnit';
+import EditBillingUnit from './BillingUnit/EditBillingUnit';
+import ListBillingUnit from './BillingUnit/ListBillingUnit';
 
 function Content() {
 
@@ -31,6 +34,11 @@ function Content() {
           {/* Begin Page Content - .container-fluid */}          
 
             <Switch>
+
+                <Route path="/billingunit/add"  component={AddBillingUnit} /> 
+                <Route path="/billingunit/:id/edit" component={EditBillingUnit} />                              
+                <Route path="/billingunit" component={ListBillingUnit} />                    
+
                 <Route path="/category/add"  component={AddCategory} /> 
                 <Route path="/category/:id/edit" component={EditCategory} />              
                 <Route path="/category" component={ListCategory} />                    

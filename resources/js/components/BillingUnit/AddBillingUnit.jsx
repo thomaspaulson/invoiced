@@ -3,8 +3,6 @@ import { Switch, Route , Link } from 'react-router-dom';
 import axios from 'axios';
 import { Input, Alert  } from 'reactstrap';
 
-//import {alertMessage} from '../../helpers/message-helpers';
-
 
 class AddBillingUnit extends React.Component {
 
