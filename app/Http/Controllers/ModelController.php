@@ -16,6 +16,7 @@ class ModelController extends Controller
     public function index()
     {
         $models = Model::join('categories', 'categories.id', '=', 'models.category_id')
+            ->where('models.status', 1)
             ->select('models.*', 'categories.title  as category_title')
             ->orderBy('models.id', 'desc')
             ->get();
@@ -98,7 +99,10 @@ class ModelController extends Controller
     public function destroy($id)
     {
       $model = Model::find($id);
-      $model->delete();
+      $model->status = 0;
+      $model->save();
+
+      //$model->delete();
 
       return response()->json(['status' => 1, 'message'=>'Model deleted.']);      
     }    

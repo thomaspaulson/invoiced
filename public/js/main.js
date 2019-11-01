@@ -85085,13 +85085,11 @@ function (_React$Component) {
     }
   }, {
     key: "setSuccess",
-    value: function setSuccess(result) {
-      console.log(result);
+    value: function setSuccess(result) {//console.log(result);
     }
   }, {
     key: "setError",
-    value: function setError(error) {
-      console.log(error.response); //console.log(q);
+    value: function setError(error) {//console.log(error.response);    
     }
   }, {
     key: "render",

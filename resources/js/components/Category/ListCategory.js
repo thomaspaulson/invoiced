@@ -5,7 +5,6 @@ import axios from 'axios';
 
 class ListCategory extends React.Component {
 
-
   constructor(props) {
     super(props);
     this.state = {
@@ -47,12 +46,11 @@ class ListCategory extends React.Component {
   }
 
   setSuccess(result){
-    console.log(result);
+    //console.log(result);
   }
 
   setError(error){
-    console.log(error.response);
-    //console.log(q);
+    //console.log(error.response);    
   }
   
   render() {

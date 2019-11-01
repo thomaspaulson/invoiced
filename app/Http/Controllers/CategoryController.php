@@ -17,6 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('id', 'desc')
+            ->where('status', 1)
             ->get();
         return response()->json($categories);
     }
@@ -99,7 +100,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
       $category = Category::find($id);
-      $category->delete();
+      $category->status = 0;
+      $category->save();
+
+      //$category->delete();
 
 
       return response()->json(['status' => 1, 'message'=>'Category deleted.']);
