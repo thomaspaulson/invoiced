@@ -68520,7 +68520,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84606,45 +84606,6 @@ if (document.getElementById('app')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Category.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Category.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Category_ListCategory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Category/ListCategory */ "./resources/js/components/Category/ListCategory.js");
-/* harmony import */ var _Category_AddCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Category/AddCategory */ "./resources/js/components/Category/AddCategory.js");
-/* harmony import */ var _Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Category/EditCategory */ "./resources/js/components/Category/EditCategory.js");
-
-
-
-
-
-
-function Category() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/category/add"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_AddCategory__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/category/:id/edit",
-    component: _Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/category"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_ListCategory__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Category);
-
-/***/ }),
-
 /***/ "./resources/js/components/Category/AddCategory.js":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Category/AddCategory.js ***!
@@ -84900,7 +84861,7 @@ function (_React$Component) {
       var data = new FormData(event.target);
       data.append('_method', 'PUT'); //console.log(data);
 
-      axios.post("/ajax/category/".concat(this.props.match.params.id, "/edit"), data).then(function (result) {
+      axios.post("/ajax/category/".concat(this.props.match.params.id), data).then(function (result) {
         return _this2.setSuccess(result);
       })["catch"](function (error) {
         return _this2.setError(error);
@@ -84912,8 +84873,8 @@ function (_React$Component) {
       //console.log(result);
       var message = result.data.message;
       this.setState({
-        title: '',
-        description: '',
+        //title: '',
+        //description: '',
         error: null,
         message: message
       });
@@ -85124,13 +85085,11 @@ function (_React$Component) {
     }
   }, {
     key: "setSuccess",
-    value: function setSuccess(result) {
-      console.log(result);
+    value: function setSuccess(result) {//console.log(result);
     }
   }, {
     key: "setError",
-    value: function setError(error) {
-      console.log(error.response); //console.log(q);
+    value: function setError(error) {//console.log(error.response);    
     }
   }, {
     key: "render",
@@ -85146,7 +85105,7 @@ function (_React$Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, category.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             className: "btn btn-sm btn-success",
             to: "/category/".concat(category.id, "/edit")
-          }, "edit"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          }, "Edit"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: function onClick() {
               return _this4.handleDelete(category.id);
             },
@@ -85204,8 +85163,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _HeaderNav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HeaderNav */ "./resources/js/components/HeaderNav.js");
 /* harmony import */ var _Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Dashboard */ "./resources/js/components/Dashboard.js");
-/* harmony import */ var _Category__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Category */ "./resources/js/components/Category.js");
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Model */ "./resources/js/components/Model.js");
+/* harmony import */ var _Category_ListCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Category/ListCategory */ "./resources/js/components/Category/ListCategory.js");
+/* harmony import */ var _Category_AddCategory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Category/AddCategory */ "./resources/js/components/Category/AddCategory.js");
+/* harmony import */ var _Category_EditCategory__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Category/EditCategory */ "./resources/js/components/Category/EditCategory.js");
+/* harmony import */ var _Model_ListModel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Model/ListModel */ "./resources/js/components/Model/ListModel.js");
+/* harmony import */ var _Model_AddModel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Model/AddModel */ "./resources/js/components/Model/AddModel.js");
+/* harmony import */ var _Model_EditModel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Model/EditModel */ "./resources/js/components/Model/EditModel.js");
+
+
+
+ //import Category from './Category';
+//import Model from './Model';
+
 
 
 
@@ -85222,11 +85191,23 @@ function Content() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeaderNav__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/category/add",
+    component: _Category_AddCategory__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/category/:id/edit",
+    component: _Category_EditCategory__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/category",
-    component: _Category__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _Category_ListCategory__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/model/add",
+    component: _Model_AddModel__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/model/:id/edit",
+    component: _Model_EditModel__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/model",
-    component: _Model__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _Model_ListModel__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/main",
     component: _Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -85506,24 +85487,7 @@ function (_Component) {
         className: "btn btn-link d-md-none rounded-circle mr-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-bars"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control bg-light border-0 small",
-        placeholder: "Search for...",
-        "aria-label": "Search",
-        "aria-describedby": "basic-addon2"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group-append"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
-        type: "button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-search fa-sm"
-      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, " Sales & Inventory Management "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav ml-auto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item dropdown no-arrow d-sm-none"
@@ -85754,47 +85718,6 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Model.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Model.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Model_ListModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Model/ListModel */ "./resources/js/components/Model/ListModel.js");
-/* harmony import */ var _Model_AddModel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Model/AddModel */ "./resources/js/components/Model/AddModel.js");
-/* harmony import */ var _Model_EditModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Model/EditModel */ "./resources/js/components/Model/EditModel.js");
-
-
-
-
-
-
-function Model() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/model/add",
-    component: _Model_AddModel__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/model/:id/edit",
-    component: _Model_EditModel__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/model",
-    component: _Model_ListModel__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Model);
-
-/***/ }),
-
 /***/ "./resources/js/components/Model/AddModel.js":
 /*!***************************************************!*\
   !*** ./resources/js/components/Model/AddModel.js ***!
@@ -85836,7 +85759,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- //import {alertMessage} from '../../helpers/message-helpers';
 
 
 
@@ -85904,7 +85826,7 @@ function (_React$Component) {
       this.setState({
         model: {
           title: '',
-          category: ''
+          category_id: ''
         },
         error: null,
         message: message
@@ -85932,6 +85854,7 @@ function (_React$Component) {
   }, {
     key: "setCategoryList",
     value: function setCategoryList(list) {
+      console.log(list);
       this.setState({
         categoryList: list
       });
@@ -86000,8 +85923,12 @@ function (_React$Component) {
         type: "select",
         name: "category_id",
         id: "category_id",
-        onChange: this.handleChange
-      }, options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onChange: this.handleChange,
+        required: true,
+        value: category_id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: ""
+      }, "-select-"), options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
       }, "Submit")))));
@@ -86027,8 +85954,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _helpers_message_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers/message-helpers */ "./resources/js/helpers/message-helpers.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -86052,6 +85985,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var EditModel =
 /*#__PURE__*/
 function (_React$Component) {
@@ -86064,14 +85998,18 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditModel).call(this, props));
     _this.state = {
-      title: '',
-      category_id: '',
+      model: {
+        title: '',
+        category: ''
+      },
+      categoryList: null,
+      //title: '',
+      //model_id: '',
       error: null,
       message: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.setResult = _this.setResult.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -86080,10 +86018,11 @@ function (_React$Component) {
     value: function handleChange(event) {
       var target = event.target; //const value = target.type === 'checkbox' ? target.checked : target.value;
 
-      var value = target.value;
       var name = target.name;
-      this.setState(_defineProperty({}, name, value));
+      var value = target.value;
+      var model = this.state.model;
       this.setState({
+        model: _objectSpread({}, model, _defineProperty({}, name, value)),
         message: ''
       });
     }
@@ -86096,7 +86035,7 @@ function (_React$Component) {
       var data = new FormData(event.target);
       data.append('_method', 'PUT'); //console.log(data);
 
-      axios.post("/ajax/category/".concat(this.props.match.params.id, "/edit"), data).then(function (result) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/ajax/model/".concat(this.props.match.params.id), data).then(function (result) {
         return _this2.setSuccess(result);
       })["catch"](function (error) {
         return _this2.setError(error);
@@ -86108,8 +86047,7 @@ function (_React$Component) {
       //console.log(result);
       var message = result.data.message;
       this.setState({
-        title: '',
-        category_id: '',
+        //model: {title: '', category_id: ''},
         error: null,
         message: message
       });
@@ -86117,53 +86055,78 @@ function (_React$Component) {
   }, {
     key: "setError",
     value: function setError(error) {
-      console.log(error.response); //console.log(q);
+      console.log(error.response);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this3 = this;
 
-      //console.log(this.props.match);
-      var params = this.props.match.params; //console.log(params);
-
-      axios.get("/ajax/category/".concat(params.id)).then(function (result) {
-        return _this3.setResult(result.data);
+      //console.log(params);
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/ajax/category").then(function (result) {
+        return _this3.setCategoryList(result.data);
       })["catch"](function (error) {
         return _this3.setState({
           error: error
         });
       });
+      var params = this.props.match.params; //console.log(params);
+      // axios.get(`/ajax/model/${params.id}`)         
+      //   .then(result => this.setResult(result.data))
+      //   .catch(error => this.setState({ error }));
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/ajax/model/".concat(params.id)).then(function (_ref) {
+        var model = _ref.data;
+
+        //console.log(data);
+        _this3.setState({
+          model: model
+        });
+      });
     }
   }, {
-    key: "setResult",
-    value: function setResult(data) {
-      //console.log(list);
-      var title = data.title,
-          description = data.description;
+    key: "setCategoryList",
+    value: function setCategoryList(list) {
       this.setState({
-        title: title,
-        description: description
+        categoryList: list
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var message;
+      var _this$state = this.state,
+          _this$state$model = _this$state.model,
+          title = _this$state$model.title,
+          category_id = _this$state$model.category_id,
+          categoryList = _this$state.categoryList;
+      var message, options;
 
       if (this.state.message) {
-        message = Object(_helpers_message_helpers__WEBPACK_IMPORTED_MODULE_2__["alertMessage"])(this.state.message);
+        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+          color: "success"
+        }, this.state.message);
+      }
+
+      if (categoryList) {
+        options = categoryList.map(function (item, index) {
+          //const key = `${this.props.name}-${item.value || `empty${index}`}`;
+          var key = "empty".concat(index);
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            key: key,
+            value: item.id
+          }, item.title);
+        });
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-sm-flex align-items-center justify-content-between mb-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "h3 mb-0 text-gray-800"
-      }, "Edit Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, "Edit Model"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "nav-link",
-        to: "/category"
+        to: "/model"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-fw fa-chart-area"
+        className: "fas fa-fw fa-angle-left"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Go back"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -86174,33 +86137,32 @@ function (_React$Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "title"
-      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
         type: "text",
-        className: "form-control",
-        id: "title",
         name: "title",
-        placeholder: "title",
-        value: this.state.title,
+        id: "title",
+        placeholder: "with a placeholder",
+        value: title,
         required: true,
         maxLength: "150",
         onChange: this.handleChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "category"
-      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        id: "description",
-        name: "description",
-        placeholder: "description",
-        value: this.state.description,
-        maxLength: "150",
-        onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        htmlFor: "model"
+      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        type: "select",
+        name: "category_id",
+        id: "category_id",
+        onChange: this.handleChange,
+        value: category_id,
+        required: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: ""
+      }, "-select-"), options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
-      }, "Update")))));
+      }, "Submit")))));
     }
   }]);
 
@@ -86340,7 +86302,7 @@ function (_React$Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, model.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, model.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, model.category_title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             className: "btn btn-sm btn-success",
             to: "/model/".concat(model.id, "/edit")
-          }, "edit"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          }, "Edit"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: function onClick() {
               return _this4.handleDelete(model.id);
             },
@@ -86476,35 +86438,6 @@ function Sidebar() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Sidebar);
-
-/***/ }),
-
-/***/ "./resources/js/helpers/message-helpers.js":
-/*!*************************************************!*\
-  !*** ./resources/js/helpers/message-helpers.js ***!
-  \*************************************************/
-/*! exports provided: alertMessage, warningMessage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "alertMessage", function() { return alertMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warningMessage", function() { return warningMessage; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var alertMessage = function alertMessage(message) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "alert alert-success",
-    role: "alert"
-  }, message);
-};
-var warningMessage = function warningMessage(message) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "alert alert-success",
-    role: "alert"
-  }, message);
-};
 
 /***/ }),
 

@@ -43,7 +43,7 @@ class EditCategory extends React.Component {
     const data = new FormData(event.target);
     data.append('_method', 'PUT');
     //console.log(data);
-    axios.post(`/ajax/category/${this.props.match.params.id}/edit`, data)         
+    axios.post(`/ajax/category/${this.props.match.params.id}`, data)         
       .then(result => this.setSuccess(result))
       .catch(error=> this.setError(error));
   }  
@@ -53,8 +53,8 @@ class EditCategory extends React.Component {
     //console.log(result);
     const message = result.data.message;
     this.setState({
-      title: '',
-      description: '',
+      //title: '',
+      //description: '',
       error: null,
       message: message
     });

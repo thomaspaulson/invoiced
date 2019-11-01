@@ -65,7 +65,7 @@ class Listmodel extends React.Component {
           <td>{model.title}</td>
           <td>{model.category_title}</td>
           <td>
-            <Link className="btn btn-sm btn-success" to={`/model/${model.id}/edit`}>edit</Link>
+            <Link className="btn btn-sm btn-success" to={`/model/${model.id}/edit`}>Edit</Link>
             &nbsp;
             <button
               onClick={() => this.handleDelete(model.id)}
