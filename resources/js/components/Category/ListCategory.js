@@ -65,7 +65,7 @@ class ListCategory extends React.Component {
           <td>{category.id}</td>
           <td>{category.title}</td>
           <td>
-            <Link className="btn btn-sm btn-success" to={`/category/${category.id}/edit`}>edit</Link>
+            <Link className="btn btn-sm btn-success" to={`/category/${category.id}/edit`}>Edit</Link>
             &nbsp;
             <button
               onClick={() => this.handleDelete(category.id)}

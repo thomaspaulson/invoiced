@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route , Link } from 'react-router-dom';
 import axios from 'axios';
-//import {alertMessage} from '../../helpers/message-helpers';
 import { Input, Alert  } from 'reactstrap';
 
 
@@ -49,7 +48,7 @@ class AddModel extends React.Component {
     //console.log(result);
     const message = result.data.message;
     this.setState({ 
-      model: {title: '', category: ''},
+      model: {title: '', category_id: ''},
       error: null,
       message: message
     });    
@@ -71,6 +70,7 @@ class AddModel extends React.Component {
   }
 
   setCategoryList(list){
+    console.log(list);
     this.setState({ categoryList: list });
   }
 
@@ -124,8 +124,9 @@ class AddModel extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="model">Category</label>            
-            <Input type="select" name="category_id" id="category_id" onChange={this.handleChange} >
-            {options}
+            <Input type="select" name="category_id" id="category_id" onChange={this.handleChange} required value={category_id} >
+              <option value="">-select-</option>
+              {options}
             </Input>            
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>

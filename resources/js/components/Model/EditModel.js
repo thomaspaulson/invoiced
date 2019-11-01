@@ -1,35 +1,36 @@
 import React from 'react';
 import { Switch, Route , Link } from 'react-router-dom';
+import axios from 'axios';
+import { Input, Alert  } from 'reactstrap';
 
-import {alertMessage} from '../../helpers/message-helpers';
 
 class EditModel extends React.Component {
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        title: '',
-        category_id: '',
-        error: null,
-        message: ""
-      };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.setResult = this.setResult.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      model: {title: '', category: ''},
+      categoryList: null, 
+      //title: '',
+      //model_id: '',
+      error: null,
+      message: ""
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  handleChange(event){
+
+  handleChange(event ){
     const target = event.target;
     //const value = target.type === 'checkbox' ? target.checked : target.value;
-    const value = target.value;
     const name = target.name;
+    const value = target.value;
 
-    this.setState({
-      [name]: value
-    });
-
-    this.setState({
-      message: ''
+    const { model } = this.state;
+    this.setState({ 
+        model: { ...model, [name]: value } ,
+        message: ''
     });
 
   }
@@ -40,7 +41,7 @@ class EditModel extends React.Component {
     const data = new FormData(event.target);
     data.append('_method', 'PUT');
     //console.log(data);
-    axios.post(`/ajax/category/${this.props.match.params.id}/edit`, data)         
+    axios.post(`/ajax/model/${this.props.match.params.id}`, data)         
       .then(result => this.setSuccess(result))
       .catch(error=> this.setError(error));
   }  
@@ -49,54 +50,73 @@ class EditModel extends React.Component {
   setSuccess(result){
     //console.log(result);
     const message = result.data.message;
-    this.setState({
-      title: '',
-      category_id: '',
+    this.setState({ 
+      //model: {title: '', category_id: ''},
       error: null,
       message: message
-    });
+    });    
 
   }
 
   setError(error){
-    console.log(error.response);
-    //console.log(q);
+    console.log(error.response);    
   }
 
-  componentDidMount() {
-    //console.log(this.props.match);
-    const { match: { params } } = this.props;
+
+  componentDidMount() {    
     //console.log(params);
-    axios.get(`/ajax/category/${params.id}`)         
-      .then(result => this.setResult(result.data))
+    axios.get(`/ajax/category`)         
+      .then(result => this.setCategoryList(result.data))
       .catch(error => this.setState({ error }));
 
+    const { match: { params } } = this.props;
+    //console.log(params);
+    // axios.get(`/ajax/model/${params.id}`)         
+    //   .then(result => this.setResult(result.data))
+    //   .catch(error => this.setState({ error }));
+  
+    axios.get(`/ajax/model/${params.id}`)
+      .then(({ data: model }) => {
+        //console.log(data);
+        this.setState({ model });
+      });      
+
   }
 
-  setResult(data){
-    //console.log(list);
-    const { title, description } = data;
-    this.setState({ title,  description });
+  setCategoryList(list){    
+    this.setState({ categoryList: list });
   }
-
 
   render() {
 
-    let message;
+    const { model: { title, category_id } , categoryList} = this.state;
+
+    let message, options;
 
     if(this.state.message){      
-      message = alertMessage(this.state.message);
+      message = <Alert color="success">{this.state.message}</Alert>;
+    }
+
+    if(categoryList){
+      options = categoryList.map((item, index) => {
+        //const key = `${this.props.name}-${item.value || `empty${index}`}`;
+        const key = `empty${index}`;
+        return (
+          <option key={key} value={item.id} >
+            {item.title}
+          </option>
+        );
+      }) 
+    
     }
 
     return (
       <div>
-      {/* dummy div*/}
-
-
+      
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Edit Category</h1>
-        <Link className="nav-link" to="/category">            
-          <i className="fas fa-fw fa-chart-area"></i>
+        <h1 className="h3 mb-0 text-gray-800">Edit Model</h1>
+        <Link className="nav-link" to="/model">            
+          <i className="fas fa-fw fa-angle-left"></i>
           <span>Go back</span>
         </Link>            
       </div>
@@ -104,35 +124,31 @@ class EditModel extends React.Component {
 
       <div className="row">        
         <div className="col-xl-12 col-md-12 mb-4">		
-        {this.state.error}       
-        {message} 
+        {this.state.error}        
+        {message}
         <form onSubmit={this.handleSubmit} >
           <div className="form-group">
             <label htmlFor="title">Title</label>
-            <input 
-              type="text" className="form-control" 
-              id="title" name="title" placeholder="title" 
-              value={ this.state.title } required 
-              maxLength="150" onChange={this.handleChange} />          
+            <Input type="text" name="title" 
+                id="title" placeholder="with a placeholder" 
+                value={title} required  
+                maxLength="150" onChange={this.handleChange} />
           </div>
           <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <input 
-              type="text" className="form-control" id="description" 
-              name="description" placeholder="description" 
-              value={ this.state.description }  maxLength="150" 
-              onChange={this.handleChange} />
+            <label htmlFor="model">Category</label>            
+            <Input type="select" name="category_id"
+               id="category_id" onChange={this.handleChange} 
+               value={category_id} required >
+              <option value="">-select-</option>
+              {options}
+            </Input>            
           </div>
-          <button type="submit" className="btn btn-primary">Update</button>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         
         </div>
       </div>
 
-
-
-
-      {/* dummy div*/}
       </div> 
 
     );
