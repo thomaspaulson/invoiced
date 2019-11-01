@@ -84606,45 +84606,6 @@ if (document.getElementById('app')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Category.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Category.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Category_ListCategory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Category/ListCategory */ "./resources/js/components/Category/ListCategory.js");
-/* harmony import */ var _Category_AddCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Category/AddCategory */ "./resources/js/components/Category/AddCategory.js");
-/* harmony import */ var _Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Category/EditCategory */ "./resources/js/components/Category/EditCategory.js");
-
-
-
-
-
-
-function Category() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/category/add"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_AddCategory__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/category/:id/edit",
-    component: _Category_EditCategory__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/category"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Category_ListCategory__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Category);
-
-/***/ }),
-
 /***/ "./resources/js/components/Category/AddCategory.js":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Category/AddCategory.js ***!
@@ -85204,8 +85165,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _HeaderNav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HeaderNav */ "./resources/js/components/HeaderNav.js");
 /* harmony import */ var _Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Dashboard */ "./resources/js/components/Dashboard.js");
-/* harmony import */ var _Category__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Category */ "./resources/js/components/Category.js");
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Model */ "./resources/js/components/Model.js");
+/* harmony import */ var _Category_ListCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Category/ListCategory */ "./resources/js/components/Category/ListCategory.js");
+/* harmony import */ var _Category_AddCategory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Category/AddCategory */ "./resources/js/components/Category/AddCategory.js");
+/* harmony import */ var _Category_EditCategory__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Category/EditCategory */ "./resources/js/components/Category/EditCategory.js");
+/* harmony import */ var _Model_ListModel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Model/ListModel */ "./resources/js/components/Model/ListModel.js");
+/* harmony import */ var _Model_AddModel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Model/AddModel */ "./resources/js/components/Model/AddModel.js");
+/* harmony import */ var _Model_EditModel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Model/EditModel */ "./resources/js/components/Model/EditModel.js");
+
+
+
+ //import Category from './Category';
+//import Model from './Model';
+
 
 
 
@@ -85222,11 +85193,23 @@ function Content() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeaderNav__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/category/add",
+    component: _Category_AddCategory__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/category/:id/edit",
+    component: _Category_EditCategory__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/category",
-    component: _Category__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _Category_ListCategory__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/model/add",
+    component: _Model_AddModel__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/model/:id/edit",
+    component: _Model_EditModel__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/model",
-    component: _Model__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _Model_ListModel__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/main",
     component: _Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -85506,24 +85489,7 @@ function (_Component) {
         className: "btn btn-link d-md-none rounded-circle mr-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-bars"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control bg-light border-0 small",
-        placeholder: "Search for...",
-        "aria-label": "Search",
-        "aria-describedby": "basic-addon2"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group-append"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
-        type: "button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-search fa-sm"
-      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, " Sales & Inventory Management "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav ml-auto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item dropdown no-arrow d-sm-none"
@@ -85751,47 +85717,6 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
-
-/***/ }),
-
-/***/ "./resources/js/components/Model.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Model.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Model_ListModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Model/ListModel */ "./resources/js/components/Model/ListModel.js");
-/* harmony import */ var _Model_AddModel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Model/AddModel */ "./resources/js/components/Model/AddModel.js");
-/* harmony import */ var _Model_EditModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Model/EditModel */ "./resources/js/components/Model/EditModel.js");
-
-
-
-
-
-
-function Model() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/model/add",
-    component: _Model_AddModel__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/model/:id/edit",
-    component: _Model_EditModel__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/model",
-    component: _Model_ListModel__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Model);
 
 /***/ }),
 
