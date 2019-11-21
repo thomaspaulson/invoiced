@@ -11,10 +11,15 @@
 |
 */
 
-Auth::routes(['register' => false]);
+//Auth::routes(['register' => false]);
+Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
 //Route::view('/{path?}', 'main');
 
 //Route::get('/main', 'MainController@index')->name('main');
+Route::get('/dashboard', 'MainController@dashboard')->name('dashboard');
+
+
+Route::get('/home', 'HomeController@index')->name('home');

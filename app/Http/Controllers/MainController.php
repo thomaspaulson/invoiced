@@ -25,4 +25,10 @@ class MainController extends Controller
     {
         return view('main');
     }        
+
+    public function dashboard()
+    {
+        return view('dashboard');
+    }        
+    
 }

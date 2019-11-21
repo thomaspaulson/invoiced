@@ -1,72 +1,57 @@
 import React from 'react';
-import { 
-  BrowserRouter as Router,
+import {   
   Switch, 
   Route 
  } from 'react-router-dom';
 
-import HeaderNav from './HeaderNav';
+import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
-//import Category from './Category';
-//import Model from './Model';
-import ListCategory from './Category/ListCategory';
-import AddCategory from './Category/AddCategory';
-import EditCategory from './Category/EditCategory';
-import ListModel from './Model/ListModel';
-import AddModel from './Model/AddModel';
-import EditModel from './Model/EditModel';
-import AddBillingUnit from './BillingUnit/AddBillingUnit';
-import EditBillingUnit from './BillingUnit/EditBillingUnit';
-import ListBillingUnit from './BillingUnit/ListBillingUnit';
+
+import ProductList from './Product/ProductList';
+import ProductAdd from './Product/ProductAdd';
+import ProductEdit from './Product/ProductEdit';
+
+import CustomerList from './Customer/CustomerList';
+import CustomerAdd from './Customer/CustomerAdd';
+import CustomerEdit from './Customer/CustomerEdit';
+
 
 function Content() {
 
     return (
       
-        <div id="content-wrapper" className="d-flex flex-column">
-        
-        <div id="content">
-        {/* Main Content */}
+		<div className="container-fluid">
+			<div className="row">
+					<Sidebar />
+					<main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+						<Switch>
+							<Route path="/" component={Dashboard} />
 
-          <HeaderNav/>
-          
-          <div className="container-fluid">  
-          {/* Begin Page Content - .container-fluid */}          
+							<Route path="/products" component={ProductList} />
+							<Route path="/products/add" component={ProductAdd} />
+							<Route path="/products/edit/" component={ProductEdit} />
 
-            <Switch>
+							<Route path="/customers" component={CustomerList} />
+							<Route path="/customers/add" component={CustomerAdd} />
+							<Route path="/customers/edit/" component={CustomerEdit} />
 
-                <Route path="/billingunit/add"  component={AddBillingUnit} /> 
-                <Route path="/billingunit/:id/edit" component={EditBillingUnit} />                              
-                <Route path="/billingunit" component={ListBillingUnit} />                    
-
-                <Route path="/category/add"  component={AddCategory} /> 
-                <Route path="/category/:id/edit" component={EditCategory} />              
-                <Route path="/category" component={ListCategory} />                    
-                <Route path="/model/add"  component={AddModel} /> 
-                <Route path="/model/:id/edit" component={EditModel} />                              
-                <Route path="/model" component={ListModel} />                    
-                <Route path="/main" component={Dashboard} />
-            </Switch>
-          
-          {/* End Page Content - .container-fluid */}          
-          </div>
-  
-        {/* End of Main Content */}
-        </div>        
-  
-        {/* Footer */}
-        <footer className="sticky-footer bg-white">
-          <div className="container my-auto">
-            <div className="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2019</span>
-            </div>
-          </div>
-        </footer>
-        {/* End of Footer */}
-  
-      </div>
+						</Switch>
+				</main>
+			</div>
+  		</div>
     
     );
 }
 
 export default Content;
+
+
+  function About() {
+	return <h2>About</h2>;
+  }
+  
+  function Users() {
+	return <h2>Users</h2>;
+  }
+  
+  

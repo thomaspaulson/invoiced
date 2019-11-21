@@ -4,81 +4,81 @@ import { Link  } from 'react-router-dom';
 function Sidebar() {
     return (
 
-        
-        <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    
-          {/* Sidebar - Brand */}          
-          <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/"> 
-            <div className="sidebar-brand-icon rotate-n-15">
-              <i className="fas fa-laugh-wink"></i>
-            </div>
-            <div className="sidebar-brand-text mx-3">Rubco <sup></sup></div>          
-          </Link>
-  
-          <hr className="sidebar-divider my-0" />
+		<nav className="col-md-2 d-none d-md-block bg-light sidebar">
+			<div className="sidebar-sticky">
+				<ul className="nav flex-column">
+				<li className="nav-item">					
+					<Link to="/"  className="nav-link active" >					
+					<span data-feather="home"></span>					
+					Dashboard <span className="sr-only">(current)</span>
+					</Link>					
+				</li>
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="file"></span>
+					Orders
+					</a>
+				</li>
+				<li className="nav-item">					
+					<Link to="/products"  className="nav-link" >
+					<span data-feather="shopping-cart"></span>
+					Products
+					</Link>
+				</li>
+				<li className="nav-item">
+					<Link to="/customers"  className="nav-link" >
+					<span data-feather="users"></span>
+					Customers
+					</Link>
+				</li>
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="bar-chart-2"></span>
+					Reports
+					</a>
+				</li>
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="layers"></span>
+					Integrations
+					</a>
+				</li>
+				</ul>
 
-          {/* Nav Item - Dashboard */}
-          <li className="nav-item">
-            <Link className="nav-link" to="/">            
-              <i className="fas fa-fw fa-tachometer-alt"></i>
-              <span>Dashboard</span>
-            </Link>            
-          </li>
-
-          {/* Divider */}
-          <hr className="sidebar-divider" />    
-
-          {/* Heading */}
-          <div className="sidebar-heading">
-            Master
-          </div>
-    
-          {/* Nav Item - Pages Collapse Menu */}
-          <li className="nav-item active">
-            <a className="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-              <i className="fas fa-fw fa-cog"></i>
-              <span>Settings</span>
-            </a>
-            <div id="collapseTwo" className="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div className="bg-white py-2 collapse-inner rounded">
-                <h6 className="collapse-header">Items</h6>
-                <Link className="collapse-item" to="/billingunit">Billing Units</Link>
-                <Link className="collapse-item" to="/category">Category</Link>
-                <Link className="collapse-item" to="/model">Model</Link>
-              </div>
-            </div>
-          </li>
-
-    
-
-          <li className="nav-item">
-            <Link className="nav-link" to="/main">            
-              <i className="fas fa-fw fa-chart-area"></i>
-              <span>Dashboard</span>
-            </Link>            
-          </li>
-
-
-          {/* Nav Item - Tables */}
-          <li className="nav-item">
-            <a className="nav-link" href="tables.html">
-              <i className="fas fa-fw fa-table"></i>
-              <span>Tables</span></a>
-          </li>
-
-          
-        
-    
-          {/* Divider */}
-          <hr className="sidebar-divider d-none d-md-block" />
-    
-          {/* Sidebar Toggler (Sidebar) */}
-          <div className="text-center d-none d-md-inline">
-            <button className="rounded-circle border-0" id="sidebarToggle"></button>
-          </div>
-    
-        </ul>
-        
+				<h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+				<span>Saved reports</span>
+				<a className="d-flex align-items-center text-muted" href="#">
+					<span data-feather="plus-circle"></span>
+				</a>
+				</h6>
+				<ul className="nav flex-column mb-2">
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="file-text"></span>
+					Current month
+					</a>
+				</li>
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="file-text"></span>
+					Last quarter
+					</a>
+				</li>
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="file-text"></span>
+					Social engagement
+					</a>
+				</li>
+				<li className="nav-item">
+					<a className="nav-link" href="#">
+					<span data-feather="file-text"></span>
+					Year-end sale
+					</a>
+				</li>
+				</ul>
+			</div>
+		</nav>        
     
     );
 }
