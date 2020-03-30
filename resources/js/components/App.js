@@ -1,23 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-  } from "react-router-dom";
 
 import HeaderNav from './HeaderNav';  
-import Content from './Content';
-  
-function App() {
+import Sidebar from './Sidebar';  
+
+function App(props) {
+    //console.log('add');
     return (
-        <Router>            
+            <>
                 <HeaderNav />                
-                <Content />            
-        </Router>      
+                <div className="container-fluid">
+                    <div className="row">
+                            <Sidebar />
+                            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                            {props.children}
+                            </main>
+                    </div>
+                </div>
+            </>
     );
 }
 
 export default App;
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
-}

@@ -25,7 +25,7 @@ function Content() {
 					<Sidebar />
 					<main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
 						<Switch>
-							<Route path="/" component={Dashboard} />
+							<Route exact path="/" component={Dashboard} />
 
 							<Route path="/products" component={ProductList} />
 							<Route path="/products/add" component={ProductAdd} />
@@ -34,6 +34,8 @@ function Content() {
 							<Route path="/customers" component={CustomerList} />
 							<Route path="/customers/add" component={CustomerAdd} />
 							<Route path="/customers/edit/" component={CustomerEdit} />
+							
+							<Route path="/about" component={About} />
 
 						</Switch>
 				</main>
