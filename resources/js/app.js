@@ -1,35 +1,35 @@
-
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-// Routes
-import AppRoutes from './routes';
-
 /**
  * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
  */
 
 require('./bootstrap');
+//require('./dashboard');
 
-//  load feather js icon anc chart-js
-require('./dashboard'); 
+window.Vue = require('vue');
+
 
 /**
- * Next, we will create a fresh React component instance and attach it to
+ * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//require('./components/App');
+import VueRouter from 'vue-router';
+import App from './components/App';
 
+import { routes } from './routes';
 
+Vue.use(VueRouter);
 
-render(
-    <Router>
-        <AppRoutes />
-    </Router>,
-    document.getElementById('app')
-);
+const router = new VueRouter({
+    routes
+});
+
+const app = new Vue({
+    el: '#app',
+    components: { App },
+    router,
+});
 

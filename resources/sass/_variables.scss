@@ -1,58 +1,19 @@
 // Body
-// $body-bg: #f8fafc;
-
-// // Typography
-// $font-family-sans-serif: 'Nunito', sans-serif;
-// //$font-size-base: 0.9rem;
-// //$line-height-base: 1.6;
-
-// // Colors
-// $blue: #3490dc;
-// $indigo: #6574cd;
-// $purple: #9561e2;
-// $pink: #f66d9b;
-// $red: #e3342f;
-// $orange: #f6993f;
-// $yellow: #ffed4a;
-// $green: #38c172;
-// $teal: #4dc0b5;
-// $cyan: #6cb2eb;
-
-
-//sb-admin/variable 
-
-// Override Bootstrap default variables here
-// Do not edit any of the files in /vendor/bootstrap/scss/!
-
-// Color Variables
-// Bootstrap Color Overrides
-
-$white: #fff !default;
-$gray-100: #f8f9fc !default;
-$gray-200: #eaecf4 !default;
-$gray-300: #dddfeb !default;
-$gray-400: #d1d3e2 !default;
-$gray-500: #b7b9cc !default;
-$gray-600: #858796 !default;
-$gray-700: #6e707e !default;
-$gray-800: #5a5c69 !default;
-$gray-900: #3a3b45 !default;
-$black: #000 !default;
-
-$blue: #4e73df !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$pink: #e83e8c !default;
-$red: #e74a3b !default;
-$orange: #fd7e14 !default;
-$yellow: #f6c23e !default;
-$green: #1cc88a !default;
-$teal: #20c9a6 !default;
-$cyan: #36b9cc !default;
+$body-bg: #f8fafc;
 
 // Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
-$body-color: $gray-600 !default;
+$line-height-base: 1.6;
 
-$font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 'Noto Color Emoji';
-
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
