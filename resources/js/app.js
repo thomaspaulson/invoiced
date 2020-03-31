@@ -5,7 +5,7 @@
  */
 
 require('./bootstrap');
-//require('./dashboard');
+require('./dashboard');
 
 window.Vue = require('vue');
 
@@ -17,7 +17,6 @@ window.Vue = require('vue');
  */
 
 import VueRouter from 'vue-router';
-import App from './components/App';
 
 import { routes } from './routes';
 
@@ -29,7 +28,6 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
-    components: { App },
-    router,
+    router
 });
 

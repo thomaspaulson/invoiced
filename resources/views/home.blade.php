@@ -8,8 +8,16 @@
     </head>
     <body>
         <div id="app">
+            @include('layouts.header')
+            <div class="container-fluid">
+                <div class="row">
+                    @include('layouts.sidebar')
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                        <router-view></router-view>
+                    </main>
+                </div>
+            </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
