@@ -8,10 +8,10 @@
                 </router-link>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <router-link to="/invoices"  class="nav-link" >
                     <span data-feather="file"></span>
-                    Orders
-                </a>
+                    Invoices
+                </router-link>
             </li>
             <li class="nav-item">
                 <router-link to="/products"  class="nav-link" >
@@ -26,10 +26,10 @@
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-linkrouter-link to="/about"  class="nav-link" >
+                <router-link to="/about"  class="nav-link" >
                     <span data-feather="users"></span>
                     About
-                </router-linkrouter-link    >
+                </router-link>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -75,6 +75,21 @@
                     <span data-feather="file-text"></span>
                     Year-end sale
                 </a>
+            </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Saved reports</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+            </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <router-link to="/taxes"  class="nav-link" >
+                    <span data-feather="dollars-sign"></span>
+                    Taxes
+                </router-link>
             </li>
         </ul>
     </div>
