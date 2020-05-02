@@ -3,10 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Tax;
+use App\Http\Requests\TaxRequest;
+use App\Traits\JsonResponseTrait;
 use Illuminate\Http\Request;
+use App\Transformers\TaxTransformer;
 
 class TaxController extends Controller
 {
+    use JsonResponseTrait;
+    
+    protected $taxTransformer;
+
+    public function __construct(TaxTransformer $taxTransformer)
+    {
+        $this->taxTransformer =  $taxTransformer;
+        //exit('dd');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +27,13 @@ class TaxController extends Controller
      */
     public function index()
     {
-        //
+        //        
+        $taxes = Tax::all();
+        return $this->respond([
+            'taxes'=> $this->taxTransformer->transformCollection($taxes->toArray())
+            ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +41,14 @@ class TaxController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(TaxRequest $request)
+    {       
+        $validated = $request->validated();
+        $tax = Tax::create($validated);
+        return $this->respond([
+            'tax' => $this->taxTransformer->transform($tax),
+            'message' => 'Tax created'
+            ]);
     }
 
     /**
@@ -46,18 +59,9 @@ class TaxController extends Controller
      */
     public function show(Tax $tax)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tax  $tax
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tax $tax)
-    {
-        //
+        return $this->respond([
+            'tax'=> $this->taxTransformer->transform($tax)         
+            ]);
     }
 
     /**
@@ -67,9 +71,15 @@ class TaxController extends Controller
      * @param  \App\Tax  $tax
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tax $tax)
+    public function update(TaxRequest $request, Tax $tax)
     {
-        //
+        $validated = $request->validated();
+        $tax = $tax->fill($validated);
+        return $this->respond([
+            'tax' => $tax,
+            'message' => 'Tax updated'
+            ]);
+
     }
 
     /**
@@ -81,5 +91,7 @@ class TaxController extends Controller
     public function destroy(Tax $tax)
     {
         //
+        $tax->delete();
+        return $this->respond(['message' => 'Tax deleted']);
     }
 }

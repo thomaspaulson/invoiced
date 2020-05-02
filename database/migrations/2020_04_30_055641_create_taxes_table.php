@@ -14,16 +14,25 @@ class CreateTaxesTable extends Migration
     public function up()
     {
         Schema::create('taxes', function (Blueprint $table) {
+            $table->bigIncrements('id');            
+            $table->char('title', 255);            
+            $table->integer('sort_order')->default(0);	
+            $table->timestamps();
+            
+        });
+
+        Schema::create('product_tax', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->char('title', 255);
-            $table->integer('percent')->default(0);	
-            $table->integer('sort_order')->default(0);	
+            $table->unsignedBigInteger('tax_id');            
+            $table->integer('percent')->default(0);	   
+            //$table->date('apply_from');                     
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
-
+            $table->foreign('tax_id')->references('id')->on('taxes');
         });
+
     }
 
     /**
@@ -33,6 +42,7 @@ class CreateTaxesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('product_tax');
         Schema::dropIfExists('taxes');
     }
 }

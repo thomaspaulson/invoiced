@@ -12,7 +12,7 @@ try {
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
-  console.log('DOM fully loaded and parsed:/resources/js/bootstarp');
+  //console.log('DOM fully loaded and parsed:/resources/js/bootstarp');
 
   feather.replace()
 

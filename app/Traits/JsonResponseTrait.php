@@ -1,7 +1,7 @@
 <?php
 namespace App\Traits;
 
-trait ResponseTrait{
+trait JsonResponseTrait{
 
     private $statusCode = 200;
 

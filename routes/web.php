@@ -15,7 +15,3 @@ Auth::routes(['register' => false]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
-//Route::view('/{path?}', 'main');
-
-Route::get('/dashboard', 'MainController@dashboard')->name('dashboard');
-

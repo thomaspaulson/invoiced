@@ -21,15 +21,17 @@
 
     export default {
 		data: function(){
-			products: []
+			return	{	
+				products: []
+			}
 		},
 		created: function () {
 			this.loadProducts()
 		},		
   		methods: {
-			  loadProducts(){
+			  loadProducts: function(){
 				  	// Make a request for a user with a given ID
-					axios.get('/products')
+					axios.get('/api/products')
 					.then(function (response) {
 						// handle success
 						console.log(response);
@@ -39,6 +41,9 @@
 						console.log(error);
 					})
 
+			  },
+			  goToAddProduct: function(){
+				  this.route.push({'name':'ProductAdd'});
 			  }
 		}	  
     }

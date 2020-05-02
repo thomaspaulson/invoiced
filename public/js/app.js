@@ -2049,7 +2049,381 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//import axios from 'axios';
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      products: []
+    };
+  },
+  created: function created() {
+    this.loadProducts();
+  },
+  methods: {
+    loadProducts: function loadProducts() {
+      // Make a request for a user with a given ID
+      axios.get('/api/products').then(function (response) {
+        // handle success
+        console.log(response);
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    goToAddProduct: function goToAddProduct() {
+      this.route.push({
+        'name': 'ProductAdd'
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxAdd.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxAdd.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _shared_NotificationBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/shared/NotificationBar */ "./resources/js/shared/NotificationBar.vue");
+/* harmony import */ var _TaxForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaxForm.vue */ "./resources/js/components/Tax/TaxForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    NotificationBar: _shared_NotificationBar__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TaxForm: _TaxForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      tax: {
+        title: '',
+        sort_order: ''
+      },
+      errors: {},
+      message: {
+        success: '',
+        error: ''
+      }
+    };
+  },
+  methods: {
+    goBack: function goBack(event) {
+      this.$router.go(-1);
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post("/api/taxes", this.tax).then(function (response) {
+        //console.log(response);
+        _this.message = {
+          success: response.data.message,
+          error: null
+        };
+        _this.errors = {};
+
+        _this.reset();
+      })["catch"](function (error) {
+        //console.log(error.response);
+        _this.message = {
+          success: null,
+          error: error.response.data.message
+        };
+        _this.errors = error.response.data.errors;
+      });
+    },
+    reset: function reset() {
+      document.getElementById('tax-form').reset();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxEdit.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxEdit.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _shared_NotificationBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/shared/NotificationBar */ "./resources/js/shared/NotificationBar.vue");
+/* harmony import */ var _TaxForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaxForm.vue */ "./resources/js/components/Tax/TaxForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    NotificationBar: _shared_NotificationBar__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TaxForm: _TaxForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      tax: {
+        title: '',
+        sort_order: ''
+      },
+      errors: {},
+      message: {
+        success: '',
+        error: ''
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.getTaxDetails();
+  },
+  methods: {
+    goBack: function goBack(event) {
+      this.$router.go(-1);
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      var id = this.$route.params.id;
+      axios.put("/api/taxes/".concat(id), this.tax).then(function (response) {
+        //console.log(response);
+        _this.message = {
+          success: response.data.message,
+          error: null
+        };
+        _this.errors = {}; //this.reset();
+      })["catch"](function (error) {
+        //console.log(error.response);
+        _this.message = {
+          success: null,
+          error: error.response.data.message
+        };
+        _this.errors = error.response.data.errors;
+      });
+    },
+    reset: function reset() {
+      document.getElementById('tax-form').reset();
+    },
+    getTaxDetails: function getTaxDetails() {
+      var _this2 = this;
+
+      var id = this.$route.params.id;
+      axios.get("/api/taxes/".concat(id)).then(function (response) {
+        //console.log(response.data);
+        _this2.tax = response.data.tax;
+      })["catch"](function (error) {
+        //console.log(error.response);
+        _this2.message = {
+          success: null,
+          error: error.response.data.message
+        };
+        _this2.errors = error.response.data.errors;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxForm.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxForm.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "tax-form",
+  props: {
+    tax: {},
+    errors: {}
+  },
+  methods: {
+    handleSubmit: function handleSubmit() {
+      this.$emit('on-submit', this.tax);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxList.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxList.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _shared_NotificationBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/shared/NotificationBar */ "./resources/js/shared/NotificationBar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    NotificationBar: _shared_NotificationBar__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      taxes: [],
+      message: {
+        success: '',
+        error: ''
+      }
+    };
+  },
+  created: function created() {
+    this.loadTaxes();
+  },
+  methods: {
+    loadTaxes: function loadTaxes() {
+      var _this = this;
+
+      // Make a request for all taxes
+      axios.get('/api/taxes').then(function (response) {
+        // handle success							
+        _this.taxes = response.data.taxes;
+      })["catch"](function (error) {
+        // handle error														
+        _this.message = {
+          success: null,
+          error: error.response.data.message
+        };
+      });
+    },
+    goToAddTax: function goToAddTax(event) {
+      this.$router.push({
+        name: 'TaxAdd'
+      });
+    },
+    deleteFeature: function deleteFeature(event, id) {
+      var _this2 = this;
+
+      axios["delete"]("api/health-plans/features/".concat(id)).then(function (response) {
+        //console.log('all done');
+        var features = _this2.healthPlan.features;
+        _this2.healthPlan.features = features.filter(function (feature) {
+          return feature.id != id;
+        });
+        _this2.message = {
+          success: "Feature deleted",
+          error: null
+        };
+      })["catch"](function (error) {
+        ///console.log(error.response);
+        _this2.message = {
+          success: null,
+          error: error.response.data.message
+        };
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/shared/NotificationBar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/shared/NotificationBar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "notification-bar",
+  props: ['message']
+});
 
 /***/ }),
 
@@ -56831,6 +57205,402 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxAdd.vue?vue&type=template&id=5b5fe3a5&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxAdd.vue?vue&type=template&id=5b5fe3a5& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+        },
+        [
+          _c("h1", { staticClass: "h2" }, [_vm._v("Add tax")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "btn-toolbar mb-2 mb-md-0" }, [
+            _c("div", { staticClass: "btn-group mr-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-outline-secondary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.goBack()
+                    }
+                  }
+                },
+                [_vm._v("Go Back")]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("notification-bar", { attrs: { message: _vm.message } }),
+      _vm._v(" "),
+      _c("tax-form", {
+        attrs: { tax: _vm.tax, errors: _vm.errors },
+        on: { "on-submit": _vm.onSubmit }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxEdit.vue?vue&type=template&id=87398f94&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxEdit.vue?vue&type=template&id=87398f94& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+        },
+        [
+          _c("h1", { staticClass: "h2" }, [_vm._v("Edit tax")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "btn-toolbar mb-2 mb-md-0" }, [
+            _c("div", { staticClass: "btn-group mr-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-outline-secondary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.goBack()
+                    }
+                  }
+                },
+                [_vm._v("Go Back")]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("notification-bar", { attrs: { message: _vm.message } }),
+      _vm._v(" "),
+      _c("tax-form", {
+        attrs: { tax: _vm.tax, errors: _vm.errors },
+        on: { "on-submit": _vm.onSubmit }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxForm.vue?vue&type=template&id=7921e9f0&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxForm.vue?vue&type=template&id=7921e9f0& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: { id: "tax-form" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.handleSubmit($event)
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "title" } }, [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.tax.title,
+              expression: "tax.title"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "title", placeholder: "Title" },
+          domProps: { value: _vm.tax.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tax, "title", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.title
+          ? _c("div", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.title[0]))
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "sort_order" } }, [_vm._v("Sort order")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.tax.sort_order,
+              expression: "tax.sort_order"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            id: "sort_order",
+            placeholder: "Sort order"
+          },
+          domProps: { value: _vm.tax.sort_order },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tax, "sort_order", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.sort_order
+          ? _c("div", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.sort_order[0]))
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxList.vue?vue&type=template&id=a5c9de6c&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Tax/TaxList.vue?vue&type=template&id=a5c9de6c& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+        },
+        [
+          _c("h1", { staticClass: "h2" }, [_vm._v("Taxes")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "btn-toolbar mb-2 mb-md-0" }, [
+            _c("div", { staticClass: "btn-group mr-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-outline-secondary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.goToAddTax()
+                    }
+                  }
+                },
+                [_vm._v("Add")]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("notification-bar", { attrs: { message: _vm.message } }),
+      _vm._v(" "),
+      _c("table", { staticClass: "table" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.taxes, function(tax) {
+            return _c("tr", { key: tax.id }, [
+              _c("td", [_vm._v(_vm._s(tax.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(tax.title))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: { name: "TaxEdit", params: { id: tax.id } } }
+                    },
+                    [_vm._v("edit")]
+                  ),
+                  _vm._v(" |\n\t\t\t\t\t\t\t"),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function(event) {
+                          _vm.deleteFeature(event, _vm.feature.id)
+                        }
+                      }
+                    },
+                    [_vm._v("delete")]
+                  )
+                ],
+                1
+              )
+            ])
+          }),
+          0
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/shared/NotificationBar.vue?vue&type=template&id=2cb3165c&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/shared/NotificationBar.vue?vue&type=template&id=2cb3165c& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.message.success
+      ? _c(
+          "div",
+          { staticClass: "alert alert-success", attrs: { role: "alert" } },
+          [_vm._v("\n        " + _vm._s(_vm.message.success) + "\n    ")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.message.error
+      ? _c(
+          "div",
+          { staticClass: "alert alert-danger", attrs: { role: "alert" } },
+          [_vm._v("\n        " + _vm._s(_vm.message.error) + "\n    ")]
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -72265,6 +73035,282 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Tax/TaxAdd.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/Tax/TaxAdd.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TaxAdd_vue_vue_type_template_id_5b5fe3a5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaxAdd.vue?vue&type=template&id=5b5fe3a5& */ "./resources/js/components/Tax/TaxAdd.vue?vue&type=template&id=5b5fe3a5&");
+/* harmony import */ var _TaxAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaxAdd.vue?vue&type=script&lang=js& */ "./resources/js/components/Tax/TaxAdd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TaxAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TaxAdd_vue_vue_type_template_id_5b5fe3a5___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TaxAdd_vue_vue_type_template_id_5b5fe3a5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Tax/TaxAdd.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxAdd.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxAdd.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxAdd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxAdd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxAdd.vue?vue&type=template&id=5b5fe3a5&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxAdd.vue?vue&type=template&id=5b5fe3a5& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxAdd_vue_vue_type_template_id_5b5fe3a5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxAdd.vue?vue&type=template&id=5b5fe3a5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxAdd.vue?vue&type=template&id=5b5fe3a5&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxAdd_vue_vue_type_template_id_5b5fe3a5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxAdd_vue_vue_type_template_id_5b5fe3a5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxEdit.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Tax/TaxEdit.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TaxEdit_vue_vue_type_template_id_87398f94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaxEdit.vue?vue&type=template&id=87398f94& */ "./resources/js/components/Tax/TaxEdit.vue?vue&type=template&id=87398f94&");
+/* harmony import */ var _TaxEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaxEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/Tax/TaxEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TaxEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TaxEdit_vue_vue_type_template_id_87398f94___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TaxEdit_vue_vue_type_template_id_87398f94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Tax/TaxEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxEdit.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxEdit.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxEdit.vue?vue&type=template&id=87398f94&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxEdit.vue?vue&type=template&id=87398f94& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxEdit_vue_vue_type_template_id_87398f94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxEdit.vue?vue&type=template&id=87398f94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxEdit.vue?vue&type=template&id=87398f94&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxEdit_vue_vue_type_template_id_87398f94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxEdit_vue_vue_type_template_id_87398f94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxForm.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Tax/TaxForm.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TaxForm_vue_vue_type_template_id_7921e9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaxForm.vue?vue&type=template&id=7921e9f0& */ "./resources/js/components/Tax/TaxForm.vue?vue&type=template&id=7921e9f0&");
+/* harmony import */ var _TaxForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaxForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Tax/TaxForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TaxForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TaxForm_vue_vue_type_template_id_7921e9f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TaxForm_vue_vue_type_template_id_7921e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Tax/TaxForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxForm.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxForm.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxForm.vue?vue&type=template&id=7921e9f0&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxForm.vue?vue&type=template&id=7921e9f0& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxForm_vue_vue_type_template_id_7921e9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxForm.vue?vue&type=template&id=7921e9f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxForm.vue?vue&type=template&id=7921e9f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxForm_vue_vue_type_template_id_7921e9f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxForm_vue_vue_type_template_id_7921e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxList.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Tax/TaxList.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TaxList_vue_vue_type_template_id_a5c9de6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaxList.vue?vue&type=template&id=a5c9de6c& */ "./resources/js/components/Tax/TaxList.vue?vue&type=template&id=a5c9de6c&");
+/* harmony import */ var _TaxList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaxList.vue?vue&type=script&lang=js& */ "./resources/js/components/Tax/TaxList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TaxList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TaxList_vue_vue_type_template_id_a5c9de6c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TaxList_vue_vue_type_template_id_a5c9de6c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Tax/TaxList.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxList.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxList.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Tax/TaxList.vue?vue&type=template&id=a5c9de6c&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Tax/TaxList.vue?vue&type=template&id=a5c9de6c& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxList_vue_vue_type_template_id_a5c9de6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TaxList.vue?vue&type=template&id=a5c9de6c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Tax/TaxList.vue?vue&type=template&id=a5c9de6c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxList_vue_vue_type_template_id_a5c9de6c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaxList_vue_vue_type_template_id_a5c9de6c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/dashboard.js":
 /*!***********************************!*\
   !*** ./resources/js/dashboard.js ***!
@@ -72281,7 +73327,7 @@ try {
 } catch (e) {}
 
 window.addEventListener('DOMContentLoaded', function (event) {
-  console.log('DOM fully loaded and parsed:/resources/js/bootstarp');
+  //console.log('DOM fully loaded and parsed:/resources/js/bootstarp');
   feather.replace();
   var ctx = document.getElementById('myChart'); // eslint-disable-next-line no-unused-vars
 
@@ -72326,9 +73372,15 @@ window.addEventListener('DOMContentLoaded', function (event) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue");
-/* harmony import */ var _components_Product_ProductList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Product/ProductList.vue */ "./resources/js/components/Product/ProductList.vue");
-/* harmony import */ var _components_Product_ProductAdd_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Product/ProductAdd.vue */ "./resources/js/components/Product/ProductAdd.vue");
-/* harmony import */ var _components_Product_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Product/ProductEdit.vue */ "./resources/js/components/Product/ProductEdit.vue");
+/* harmony import */ var _components_Product_ProductAdd_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Product/ProductAdd.vue */ "./resources/js/components/Product/ProductAdd.vue");
+/* harmony import */ var _components_Product_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Product/ProductEdit.vue */ "./resources/js/components/Product/ProductEdit.vue");
+/* harmony import */ var _components_Product_ProductList_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Product/ProductList.vue */ "./resources/js/components/Product/ProductList.vue");
+/* harmony import */ var _components_Tax_TaxAdd_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Tax/TaxAdd.vue */ "./resources/js/components/Tax/TaxAdd.vue");
+/* harmony import */ var _components_Tax_TaxEdit_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Tax/TaxEdit.vue */ "./resources/js/components/Tax/TaxEdit.vue");
+/* harmony import */ var _components_Tax_TaxList_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Tax/TaxList.vue */ "./resources/js/components/Tax/TaxList.vue");
+
+
+
 
 
 
@@ -72339,17 +73391,98 @@ var routes = [{
   name: 'Dashboard'
 }, {
   path: '/products/add',
-  component: _components_Product_ProductAdd_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+  component: _components_Product_ProductAdd_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
   name: 'ProductAdd'
 }, {
-  path: '/products/add',
-  component: _components_Product_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+  path: '/products/edit/:id',
+  component: _components_Product_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: 'ProductEdit'
 }, {
   path: '/products',
-  component: _components_Product_ProductList_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Product_ProductList_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   name: 'ProductList'
+}, {
+  path: '/taxes/add',
+  component: _components_Tax_TaxAdd_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  name: 'TaxAdd'
+}, {
+  path: '/taxes/edit/:id',
+  component: _components_Tax_TaxEdit_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  name: 'TaxEdit'
+}, {
+  path: '/taxes',
+  component: _components_Tax_TaxList_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  name: 'TaxList'
 }];
+
+/***/ }),
+
+/***/ "./resources/js/shared/NotificationBar.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/shared/NotificationBar.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _NotificationBar_vue_vue_type_template_id_2cb3165c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NotificationBar.vue?vue&type=template&id=2cb3165c& */ "./resources/js/shared/NotificationBar.vue?vue&type=template&id=2cb3165c&");
+/* harmony import */ var _NotificationBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NotificationBar.vue?vue&type=script&lang=js& */ "./resources/js/shared/NotificationBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _NotificationBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _NotificationBar_vue_vue_type_template_id_2cb3165c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _NotificationBar_vue_vue_type_template_id_2cb3165c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/shared/NotificationBar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/shared/NotificationBar.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/shared/NotificationBar.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./NotificationBar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/shared/NotificationBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/shared/NotificationBar.vue?vue&type=template&id=2cb3165c&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/shared/NotificationBar.vue?vue&type=template&id=2cb3165c& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationBar_vue_vue_type_template_id_2cb3165c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./NotificationBar.vue?vue&type=template&id=2cb3165c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/shared/NotificationBar.vue?vue&type=template&id=2cb3165c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationBar_vue_vue_type_template_id_2cb3165c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationBar_vue_vue_type_template_id_2cb3165c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

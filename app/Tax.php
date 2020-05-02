@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tax extends Model
 {
     //
-    private $fillable = [
+    protected $fillable = [
         'title',
         'percent',
         'sort_order'

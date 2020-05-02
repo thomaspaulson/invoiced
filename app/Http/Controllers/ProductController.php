@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-use App\Traits\ResponseTrait;
+use App\Traits\JsonResponseTrait;
 
 class ProductController extends Controller
 {
-    use ResponseTrait;
+    use JsonResponseTrait;
     
     /**
      * Display a listing of the resource.
