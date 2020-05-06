@@ -1,7 +1,7 @@
 <template>
         <div>
 			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-				<h1 class="h2">Add tax</h1>
+				<h1 class="h2">Edit product</h1>
 				<div class="btn-toolbar mb-2 mb-md-0">
 					<div class="btn-group mr-2">						
 						<button type="button" class="btn btn-sm btn-outline-secondary" v-on:click="goBack()">Go Back</button>
@@ -9,23 +9,25 @@
 				</div>
 			</div> <!-- -->
             <notification-bar :message="message"></notification-bar>
-            <tax-form @on-submit="onSubmit" :tax="tax" :errors="errors"></tax-form>
+            <product-form @on-submit="onSubmit" :product="product" :errors="errors"></product-form>
         </div>
 </template>
 <script>
-    import NotificationBar from '@/shared/NotificationBar';
-    import TaxForm from './TaxForm.vue';
+    import NotificationBar from '@/Shared/NotificationBar';
+    import ProductForm from './ProductForm.vue';
 
     export default {
         components: {
             NotificationBar,
-            TaxForm
+            ProductForm
         },
         data:function(){            
             return  {
-                tax:{
-                    title: '',
-                    sort_order  : ''
+                product:{
+                    name: '',
+                    price: '',
+                    taxable  : '',
+                    taxes: []
                 },
                 errors: {},
                 message: {
@@ -34,18 +36,22 @@
                 }                
             }
         },
+        mounted() {            
+            this.getTaxDetails();
+        },
         methods: {
     		goBack: function(event){				  
 			    this.$router.go(-1);				  
             }, 
             onSubmit: function(){
+                const {id} = this.$route.params;
                 axios
-                    .post(`/api/taxes`, this.tax)
+                    .put(`/api/products/${id}`, this.product)
                     .then( response => {
                         //console.log(response);
                         this.message = {success: response.data.message, error: null};
                         this.errors={};
-                        this.reset();
+                        //this.reset();
                     })
                     .catch( error => {
                         //console.log(error.response);
@@ -55,8 +61,25 @@
                     })
             },
             reset: function(){
-                document.getElementById('tax-form').reset();
+                document.getElementById('product-form').reset();
+            },
+            getTaxDetails(){
+                const {id} = this.$route.params;
+                axios
+                    .get(`/api/products/${id}`)
+                    .then(response => {
+                        //console.log(response.data);
+                        this.product = response.data.product;
+                    })
+                    .catch( error => {
+                        //console.log(error.response);
+                        this.message = {success: null,error: error.response.data.message};
+                        this.errors = error.response.data.errors;
+
+                    })
+
             }
+
         }
     }
 </script>

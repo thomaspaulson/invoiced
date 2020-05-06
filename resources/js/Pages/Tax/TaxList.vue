@@ -22,8 +22,8 @@
                         <td>{{ tax.id }}</td>
                         <td>{{ tax.title }}</td>                        
                         <td>
-                            <router-link :to="{ name: 'TaxEdit', params: { id: tax.id }}" class="btn btn-primary" >edit</router-link> |
-							<button @click="(event) => { deleteFeature(event, feature.id) }" class="btn btn-primary" >delete</button>
+                            <router-link :to="{ name: 'TaxEdit', params: { id: tax.id }}" class="btn btn-primary  btn-sm" >edit</router-link> |
+							<button @click="(event) => { deleteTax(event, tax.id) }" class="btn btn-primary btn-sm" >delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -32,7 +32,7 @@
         </div>
 </template>
 <script>
-	import NotificationBar from '@/shared/NotificationBar';	
+	import NotificationBar from '@/Shared/NotificationBar';	
 
     export default {
         components: {
@@ -51,41 +51,44 @@
 			this.loadTaxes();
 		},		
   		methods: {
-			  loadTaxes(){
-				  	// Make a request for all taxes
-					axios
-						.get('/api/taxes')
-						.then( (response) => {
-							// handle success							
-							this.taxes = response.data.taxes;
+			loadTaxes(){
+				// Make a request for all taxes
+				axios
+					.get('/api/taxes')
+					.then( (response) => {
+						// handle success							
+						this.taxes = response.data.taxes;
 
-						})
-						.catch( (error) => {
-							// handle error														
-							this.message = {success: null, error: error.response.data.message };		
-						})
+					})
+					.catch( (error) => {
+						// handle error														
+						this.message = {success: null, error: error.response.data.message };		
+					})
 
-
-			  },
-			  goToAddTax: function(event){				  
+			},
+			goToAddTax: function(event){				  
 				  this.$router.push({name:'TaxAdd'});				  
-			  },
-				deleteFeature: function(event, id){
+			},
+			deleteTax: function(event, id){
+				//
+				if(!window.confirm('Are you sure?')){
+					return;
+				}
+				
+				axios
+					.delete(`api/taxes/${id}`)
+					.then( response => {
+						//console.log('all done');
+						let taxes = this.taxes;
+						this.taxes = taxes.filter(tax => { return tax.id!=id; });
+						this.message = {success: "Tax deleted", error: null};
 
-					axios
-						.delete(`api/health-plans/features/${id}`)
-						.then( response => {
-							//console.log('all done');
-							let features = this.healthPlan.features;
-							this.healthPlan.features = features.filter(feature => { return feature.id!=id; });
-							this.message = {success: "Feature deleted",error: null};
-
-						})
-						.catch( error => {
-							///console.log(error.response);
-							this.message = {success: null,error: error.response.data.message};
-						})
-				}			  
+					})
+					.catch( error => {
+						///console.log(error.response);
+						this.message = {success: null,error: error.response.data.message};
+					})
+			}			  
 		}	  
     }
 </script>

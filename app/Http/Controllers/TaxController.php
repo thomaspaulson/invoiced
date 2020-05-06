@@ -16,8 +16,7 @@ class TaxController extends Controller
 
     public function __construct(TaxTransformer $taxTransformer)
     {
-        $this->taxTransformer =  $taxTransformer;
-        //exit('dd');
+        $this->taxTransformer =  $taxTransformer;        
     }
     
     /**
@@ -75,6 +74,7 @@ class TaxController extends Controller
     {
         $validated = $request->validated();
         $tax = $tax->fill($validated);
+        $tax->save();
         return $this->respond([
             'tax' => $tax,
             'message' => 'Tax updated'

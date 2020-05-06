@@ -1,11 +1,11 @@
 
-import Dashboard from './components/Dashboard.vue';
-import ProductAdd from './components/Product/ProductAdd.vue';
-import ProductEdit from './components/Product/ProductEdit.vue';
-import ProductList from './components/Product/ProductList.vue';
-import TaxAdd from './components/Tax/TaxAdd.vue';
-import TaxEdit from './components/Tax/TaxEdit.vue';
-import TaxList from './components/Tax/TaxList.vue';
+import Dashboard from './Pages/Dashboard.vue';
+import ProductAdd from './Pages/Product/ProductAdd.vue';
+import ProductEdit from './Pages/Product/ProductEdit.vue';
+import ProductList from './Pages/Product/ProductList.vue';
+import TaxAdd from './Pages/Tax/TaxAdd.vue';
+import TaxEdit from './Pages/Tax/TaxEdit.vue';
+import TaxList from './Pages/Tax/TaxList.vue';
 
 export const routes = [
     { path: '/', component: Dashboard, name: 'Dashboard' },

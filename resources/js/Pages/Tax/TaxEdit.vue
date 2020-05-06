@@ -13,7 +13,7 @@
         </div>
 </template>
 <script>
-    import NotificationBar from '@/shared/NotificationBar';
+    import NotificationBar from '@/Shared/NotificationBar';
     import TaxForm from './TaxForm.vue';
 
     export default {

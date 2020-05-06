@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('products', 'ProductController');
-Route::resource('taxes', 'TaxController');
+Route::resource('products', 'ProductController');//->middleware('auth');
+Route::resource('taxes', 'TaxController');//->middleware('auth');
