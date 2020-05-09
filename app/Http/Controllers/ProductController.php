@@ -31,13 +31,7 @@ class ProductController extends Controller
         $products = Product::paginate(); //return $products->toArray();
         return $this->respond([
             'products'=> $this->productTransformer->transformCollection($products->items()),
-            'meta'=> [
-                    'current_page' => $products->currentPage(),
-                    'last_page' => $products->lastPage(),
-                    'next_page_url' => $products->nextPageUrl(),
-                    'per_page' => $products->perPage(),
-                    'total' => $products->total(),
-                ]
+            'meta'=> $this->productTransformer->metaData($products)
             ]);
     }
 
