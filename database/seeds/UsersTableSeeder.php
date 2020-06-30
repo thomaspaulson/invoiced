@@ -7,6 +7,7 @@ class UsersTableSeeder extends Seeder
     /**
      * Run the database seeds.
      *
+	 * php artisan db:seed --class=UsersTableSeeder
      * @return void
      */
     public function run()
