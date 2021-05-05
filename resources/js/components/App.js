@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-  } from "react-router-dom";
 
-import HeaderNav from './HeaderNav';  
-import Content from './Content';
+import { element } from 'prop-types';
+//import Icon from '@/Shared/Icon'
+import Header from '@/shared/components/Header';  
+import Content from '@/shared/components/Content';
   
-function App() {
+const App = (props) =>  {
     return (
-        <Router>            
-                <HeaderNav />                
-                <Content />            
-        </Router>      
+        <>
+            <Header />                
+            <Content>
+                {props.children}        
+            </Content>
+        </>
     );
 }
 
 export default App;
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
-}
+App.propTypes = {
+    children: element
+};
+  
