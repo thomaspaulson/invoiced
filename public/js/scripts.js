@@ -503,7 +503,7 @@ eval("/**\n* First we will load all of this project's JavaScript dependencies wh
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\invoiced\resources\js\scripts.js */"./resources/js/scripts.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/invoiced/resources/js/scripts.js */"./resources/js/scripts.js");
 
 
 /***/ })
