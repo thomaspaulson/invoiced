@@ -25,6 +25,6 @@ Route::get('/taxes', 'HomeController@index')->name('home');
 Route::resource('tasks', 'TaskController');
 
 
-Route::get('/{vue?}', function () {
-    return view('home');
-})->where('vue', '[\/\w\.-]*')->name('login');
+// Route::get('/{vue?}', function () {
+//     return view('home');
+// })->where('vue', '[\/\w\.-]*')->name('login');

@@ -1,22 +1,15 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
+    <!-- style -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
@@ -30,14 +23,30 @@
           font-size: 3.5rem;
         }
       }
-    </style>
-        
-</head>
-<body>
-    <div id="app">
-        <main class="py-4">
-            @yield('content')
+    </style>    
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    @yield('styles')
+  </head>
+  <body>    
+    @include('shared.header')
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          @include('shared.sidebar')
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+          @yield('content')
         </main>
+      </div>
     </div>
-</body>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('scripts')
+  </body>
 </html>
+
+
+
+
+
+
